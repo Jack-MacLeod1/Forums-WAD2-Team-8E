@@ -1,0 +1,19 @@
+# Python / Django
+*.pyc
+__pycache__/
+*.pot
+*.py[co]
+
+# Database
+db.sqlite3
+db.sqlite3-journal
+
+# Virtual Environments
+venv/
+env/
+.env
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
