@@ -1,0 +1,7 @@
+Standard cyan blue (header bar): 1ec9ff - note, this was done with 50% opacity, so appears darker in the wireframes as there is a grey background
+
+Standard light orange (buttons, hot topics background): f9cb9c
+
+darker grey (site background, very bottom layer) : cccccc
+
+lighter grey (boxes for discussion and posts): eeeeee
