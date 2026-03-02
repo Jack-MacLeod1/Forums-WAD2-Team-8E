@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forums - Home</title>
+</head>
+<body>
+    <h1>🚀 Welcome to our Forums!</h1>
+    <p>Although it doesn't have any CSS right now and looks a bit basic, this is the very first page we built with our own hands!</p>
+
+    <hr>
+
+    <h2>Current Categories:</h2>
+    <ul>
+        {% if categories %}
+            {% for category in categories %}
+                <li>{{ category.name }}</li>
+            {% endfor %}
+        {% else %}
+            <li>No categories available yet. Let's create some!</li>
+        {% endif %}
+    </ul>
+
+</body>
+</html>
