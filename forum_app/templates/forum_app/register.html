@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register for Forums</h1>
+
+    {% if registered %}
+        <p>Registration Successful! You can now log in.</p>
+    {% else %}
+        <form id="user_form" method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            <input type="submit" name="submit" value="Register" />
+        </form>
+    {% endif %}
+</body>
+</html>
