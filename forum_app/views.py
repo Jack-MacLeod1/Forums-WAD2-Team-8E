@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from forum_app.models import Category
 from forum_app.forms import UserForm, UserProfileForm
+from django.contrib.auth import authenticate, login
+from django.shortcuts import redirect
 
 def index(request):
     category_list = Category.objects.all()
@@ -38,3 +40,24 @@ def register(request):
     }
 
     return render(request, 'forum_app/register.html', context=context_dict)
+
+
+def user_login(request):
+    error_msg = ""
+
+    if request.method == 'POST':
+        user_name = request.POST.get('username')
+        pass_word = request.POST.get('password')
+
+        user = authenticate(username=user_name, password=pass_word)
+
+        if user:
+            if user.is_active:
+                login(request, user)
+                return redirect('forum_app:index')
+            else:
+                error_msg = "Your account is disabled."
+        else:
+            error_msg = "Invalid login details supplied."
+
+    return render(request, 'forum_app/login.html', {'error_msg': error_msg})
