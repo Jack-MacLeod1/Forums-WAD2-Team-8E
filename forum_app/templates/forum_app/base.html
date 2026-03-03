@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Forum</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+
+    
+
+<nav class="navbar navbar-expand-sm bg-light">
+
+  <div class="container-fluid">
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a href="{% url 'forum_app:login' %}" class="btn btn-primary">
+            Login
+
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'forum_app:register' %}" class="btn btn-primary ms-2">
+            Sign up
+        </a>
+      </li>
+    </ul>
+    <form class="d-flex ms-auto" method="GET">
+        <input class="form-control me-2" 
+               type="search"
+               name="q"
+               placeholder="Explore the forums">
+
+        <button class="btn btn-outline-light" type="submit">
+            Search
+        </button>
+    </form>
+  </div>
+
+</nav>
+
+    <!-- Main page content -->
+    <div class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+
+</html>
+

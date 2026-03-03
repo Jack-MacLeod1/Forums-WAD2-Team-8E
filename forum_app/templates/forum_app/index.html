@@ -1,28 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Forums - Home</title>
-</head>
-<body>
-    <h1>🚀 Welcome to our Forums!</h1>
-    <p>Although it doesn't have any CSS right now and looks a bit basic, this is the very first page we built with our own hands!</p>
+{% extends "forum_app/base.html" %}
+{% load static %}
 
-    <a href="{% url 'forum_app:register' %}" style="font-size: 18px; font-weight: bold; color: blue;">📝 Register a New Account</a>
+
+
+
+{% block content %}
+
+<h1>🚀 Welcome to our Forums!</h1>
+<p>Although it doesn't have any CSS right now and looks a bit basic, this is the very first page we built with our own hands!</p>
+
+<a href="{% url 'forum_app:register' %}" style="font-size: 18px; font-weight: bold; color: blue;">📝 Register a New Account</a>
     <br><br>
-    <a href="{% url 'forum_app:login' %}" style="font-size: 18px; font-weight: bold; color: green;">🔑 Login to Your Account</a>
-    <hr>
+<a href="{% url 'forum_app:login' %}" style="font-size: 18px; font-weight: bold; color: green;">🔑 Login to Your Account</a>
 
-    <h2>Current Categories:</h2>
-    <ul>
-        {% if categories %}
-            {% for category in categories %}
-                <li>{{ category.name }}</li>
-            {% endfor %}
-        {% else %}
-            <li>No categories available yet. Let's create some!</li>
-        {% endif %}
-    </ul>
+<hr>
 
-</body>
-</html>
+<h2>Current Categories:</h2>
+
+<ul>
+    {% if categories %}
+        {% for category in categories %}
+            <li>{{ category.name }}</li>
+        {% endfor %}
+    {% else %}
+         <li>No categories available yet. Let's create some!</li>
+    {% endif %}
+</ul>
+
+{% endblock %}
