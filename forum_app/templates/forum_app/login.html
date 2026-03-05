@@ -1,24 +1,35 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Forums - Login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
-    <h1>🔑 Login to Forums</h1>
+    <div class="all">
+        <div class="welcome-msg"><h1>Welcome Back</h1></div>   
 
-    {% if error_msg %}
-        <p style="color: red; font-weight: bold;">{{ error_msg }}</p>
-    {% endif %}
-
-    <form method="post" action="{% url 'forum_app:login' %}">
-        {% csrf_token %}
-        Username: <input type="text" name="username" value="" size="50" /><br /><br />
-        Password: <input type="password" name="password" value="" size="50" /><br /><br />
-        <input type="submit" value="Login" />
-    </form>
-
-    <br>
-    <p>Don't have an account? <a href="{% url 'forum_app:register' %}">Register here</a></p>
+        <div class="form">
+        <form method="post" action="{% url 'forum_app:login' %}">
+            {% csrf_token %}
+            <div class="details">
+                Email: <div class="input"><input class="email" type="text" name="username" value="" size="50" placeholder="Enter email" /></div><br />
+            </div>
+            <div class="details">
+                Password: <div class="input"><input class ="password" type="password" name="password" value="" size="50" placeholder="Enter password"/></div><br />
+            </div>
+            <div class="details">
+                <label><input type="checkbox">Remember Me?</label>
+                <input class="login-button" type="submit" value="Log In" />
+            </div>
+            <div class="details">No Account? <a class="signup-button" href="{% url 'forum_app:register' %}">Sign Up</a></div>
+        </form>
+        </div>
+        
+        {% if error_msg %}
+            <p class="error">{{ error_msg }}</p>
+        {% endif %}
+    </div>
 </body>
 </html>

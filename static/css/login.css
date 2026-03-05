@@ -1,0 +1,99 @@
+body {
+    background-color: #cccccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+}
+
+.welcome-msg {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-left: 10px;
+    font-family: cursive;
+    background-color: #eeeeee;
+    width: 890px;
+    height: 80px;
+    color: black;
+    border: 2px solid black;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 900px;
+    height: 50px;
+    background-color: #eeeeee;
+    font-family: cursive;
+    color: black;
+    border: 2px solid black;
+}
+
+.details .input .email{
+    margin: 55px;
+    margin-right: 400px;
+}
+
+.details .input .password{
+    margin: 25px;
+    margin-right: 400px;
+}
+
+.details .signup-button {
+    margin: 50px;
+    margin-right: 665px ;
+}
+
+.details .login-button {
+    margin: 15px;
+    margin-right: 670px;
+}
+
+.login-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: cursive;
+    font-size: 15px;
+    color: black;
+    border: 2px solid black;
+    width: 65px;
+    height: 30px;
+    background-color: #f9cb9c;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: cursive;
+}
+
+.signup-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: cursive;
+    font-size: 15px;
+    color: black;
+    border: 2px solid black;
+    width: 65px;
+    height: 25px;
+    background-color: #f9cb9c;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+
+}
+
+.error{
+    color: #ee0000;
+    font-family: cursive;
+}
+

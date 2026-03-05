@@ -8,6 +8,7 @@ To ensure a consistent UI across the frontend, we are strictly following this co
 * **Standard Light Orange (Buttons, Hot Topics):** `#f9cb9c`.
 * **Darker Grey (Site Background):** `#cccccc`.
 * **Lighter Grey (Discussion and Posts boxes):** `#eeeeee`.
+* **Error Red: ** `#ee0000`
 
 ---
 
