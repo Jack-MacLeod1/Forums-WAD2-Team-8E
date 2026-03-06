@@ -1,20 +1,25 @@
 <!DOCTYPE html>
-<html>
+{% load static %}
+<html lang="en">
 <head>
-    <title>Register</title>
+    <meta charset="UTF-8">
+    <title>Forums - Login</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
 </head>
 <body>
-    <h1>Register for Forums</h1>
+    <div class="all">
+        <h1 class="sign-up">Sign Up</h1>
 
-    {% if registered %}
-        <p>Registration Successful! You can now log in.</p>
-    {% else %}
-        <form id="user_form" method="post" action="" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
-            <input type="submit" name="submit" value="Register" />
-        </form>
-    {% endif %}
+        {% if registered %}
+            <p>Registration Successful! You can now log in.</p>
+        {% else %}
+            <form id="user_form" method="post" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ user_form.as_p }}
+                {{ profile_form.as_p }}
+                <p><input class = "signup-button" type="submit" name="submit" value="Sign Up" /></p>
+            </form>
+        {% endif %}
+    </div>
 </body>
 </html>

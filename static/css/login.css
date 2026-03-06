@@ -29,6 +29,7 @@ body {
     font-family: cursive;
     color: black;
     border: 2px solid black;
+    margin-top: -2px;
 }
 
 .details .input .email{
@@ -65,7 +66,6 @@ body {
     cursor: pointer;
     border-radius: 5px;
     text-decoration: none;
-    
 }
 
 .input {
