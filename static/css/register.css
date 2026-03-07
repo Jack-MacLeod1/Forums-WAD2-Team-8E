@@ -1,11 +1,11 @@
-body {
-    background-color: #cccccc;
+
+.all {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 800px;
+    height: 700px;
     font-family: cursive;
-
 }
 
 .sign-up {
@@ -18,8 +18,7 @@ body {
     background-color: #eeeeee;
     color: black;
     border: 2px solid black;
-    margin: -2px;
-    
+    margin: -2px;    
 }
 
 p {
@@ -62,7 +61,7 @@ p {
     margin : 80px;
 }
 
-.signup-button {
+.signup-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -75,5 +74,9 @@ p {
     background-color: #f9cb9c;
     cursor: pointer;
     border-radius: 5px;
+}
+
+.signup-btn:hover{
+    background-color: #faf2e2;
 }
 

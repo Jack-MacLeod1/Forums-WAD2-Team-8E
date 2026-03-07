@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: #cccccc;
 }
 
 
@@ -9,6 +10,8 @@ body {
     font-family: cursive;
     padding-right: 15px;
     padding-left: 15px;
+    border: 3px solid black ;
+
 }
 
 .navdiv {
@@ -51,6 +54,10 @@ li a {
     text-decoration: none;
 }
 
+li a:hover{
+    background-color: #faf2e2;
+}
+
 
 .nav-search {
     position: absolute;
@@ -74,7 +81,10 @@ li a {
     border-radius: 5px;
     cursor: pointer;
     font-family: cursive;
-    
+}
+
+.search-btn:hover{
+    background-color: #faf2e2;
 }
 
 .home-icon {
@@ -85,7 +95,7 @@ li a {
 }
 
 .home-icon:hover {
-    color: white;
+    color: #faf2e2;
 }
 
 

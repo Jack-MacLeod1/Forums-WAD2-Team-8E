@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+{% extends "forum_app/base.html" %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+
+{% block headblock %}
     <title>Forums - Login</title>
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
-</head>
-<body>
-    <div class="all">
+{% endblock %}
+
+{% block content %}
+    <div class="all"> 
         <div class="welcome-msg"><h1>Welcome Back</h1></div>   
 
         <div class="form">
@@ -21,9 +21,9 @@
             </div>
             <div class="details">
                 <label><input type="checkbox">Remember Me?</label>
-                <input class="login-button" type="submit" value="Log In" />
+                <input class="login-btn" type="submit" value="Log In" />
             </div>
-            <div class="details">No Account? <a class="signup-button" href="{% url 'forum_app:register' %}">Sign Up</a></div>
+            <div class="details">No Account? <a class="signup-btn" href="{% url 'forum_app:register' %}">Sign Up</a></div>
         </form>
         </div>
         
@@ -31,5 +31,4 @@
             <p class="error">{{ error_msg }}</p>
         {% endif %}
     </div>
-</body>
-</html>
+{% endblock %}

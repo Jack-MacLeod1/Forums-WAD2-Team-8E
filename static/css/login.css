@@ -1,10 +1,12 @@
-body {
-    background-color: #cccccc;
+
+.all {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 800px;
+    height: 598px;
 }
+
 
 .welcome-msg {
     display: flex;
@@ -42,17 +44,17 @@ body {
     margin-right: 400px;
 }
 
-.details .signup-button {
+.details .signup-btn {
     margin: 50px;
     margin-right: 665px ;
 }
 
-.details .login-button {
+.details .login-btn {
     margin: 15px;
     margin-right: 670px;
 }
 
-.login-button{
+.login-btn{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,6 +70,10 @@ body {
     text-decoration: none;
 }
 
+.login-btn:hover{
+    background-color: #faf2e2;
+}
+
 .input {
     display: flex;
     align-items: center;
@@ -75,7 +81,7 @@ body {
     font-family: cursive;
 }
 
-.signup-button {
+.signup-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -90,6 +96,10 @@ body {
     border-radius: 5px;
     text-decoration: none;
 
+}
+
+.signup-btn:hover{
+    background-color: #faf2e2;
 }
 
 .error{
