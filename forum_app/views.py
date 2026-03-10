@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from forum_app.models import Category
 from forum_app.forms import UserForm, UserProfileForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
+from django.urls import reverse
+from django.http import HttpResponse
 
 def index(request):
     category_list = Category.objects.all()
@@ -61,3 +63,8 @@ def user_login(request):
             error_msg = "Invalid login details supplied."
 
     return render(request, 'forum_app/login.html', {'error_msg': error_msg})
+
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('forum_app:index'))
+

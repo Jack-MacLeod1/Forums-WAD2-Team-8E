@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -26,20 +25,22 @@
       <button class="search-btn">Search</button>
     </div>
       <ul class="nav-right">
-        <li><a class="login-button" href="{% url 'forum_app:login' %}">Log In</a></li>
-        <li><a class="signup-button" href="{% url 'forum_app:register' %}">Sign Up</a></li>
+        {% if user.is_authenticated %}
+            <li><span style="color: white; margin-right: 15px; font-weight: bold;">Welcome, {{ user.username }}!</span></li>
+            <li><a class="login-button" href="{% url 'forum_app:logout' %}">Log Out</a></li>
+        {% else %}
+            <li><a class="login-button" href="{% url 'forum_app:login' %}">Log In</a></li>
+            <li><a class="signup-button" href="{% url 'forum_app:register' %}">Sign Up</a></li>
+        {% endif %}
       </ul>
     </div>
   </nav>
 
-    <!-- Main page content -->
     <div class="container mt-4">
         {% block content %}
         {% endblock %}
     </div>
 
-    
 </body>
 
 </html>
-
