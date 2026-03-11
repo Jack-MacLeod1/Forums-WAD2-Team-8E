@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.http import HttpResponse
 
 def index(request):
-    category_list = Category.objects.all()
+    category_list = Category.objects.order_by()
     context_dict = {'categories': category_list}
     return render(request, 'forum_app/index.html', context=context_dict)
 

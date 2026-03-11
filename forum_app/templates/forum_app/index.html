@@ -3,30 +3,57 @@
 
 {% block headblock %}
     <title>Forums</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock %}
 
 
 {% block content %}
 
-<h1>🚀 Welcome to our Forums!</h1>
-<p>Although it doesn't have any CSS right now and looks a bit basic, this is the very first page we built with our own hands!</p>
+<nav class="sidebar">
+    <header class="sidebar-header"><h2>Forums</h2></header>
+    <div class="sidebar-scrollbox">
+        <div class="sidebar-scrollbox-inner">
+            <ul>
+            {% if categories %}
+                {% for category in categories %}
+                    <li><h2><a href="#">{{ category.name }}</a></h2></li>
+                {% endfor %}
+            {% else %}
+                <h2><li>None!</li></h2>
+                <h2><li>None!</li></h2>
+                <h2><li>None!</li></h2>
+                <h2><li>None!</li></h2>
+                <h2><li>None!</li></h2>
+                <h2><li>None!</li></h2>
+                <h2><li>None!</li></h2>
+                <h2><li>None!</li></h2>
+                <h2><li>None!</li></h2>
+                <h2><li>None!</li></h2>
+                <h2><li>None!</li></h2>
+                <h2><li>None!</li></h2>
+                <h2><li>None!</li></h2>
+                <h2><li>None!</li></h2>
+                <h2><li>None!</li></h2>
+                <h2><li>None!</li></h2>
+                <h2><li>third last!</li></h2>
+                <h2><li>second last!</li></h2>
+                <h2><li>last one!</li></h2>
+            {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
 
-<a href="{% url 'forum_app:register' %}" style="font-size: 18px; font-weight: bold; color: blue;">📝 Register a New Account</a>
-    <br><br>
-<a href="{% url 'forum_app:login' %}" style="font-size: 18px; font-weight: bold; color: green;">🔑 Login to Your Account</a>
+<div class="central-content-box">
+    <div class="central-content">
+        {% block central-content %}
 
-<hr>
+            <h1 class="example">CONTENT HERE</h1>
 
-<h2>Current Categories:</h2>
-
-<ul>
-    {% if categories %}
-        {% for category in categories %}
-            <li>{{ category.name }}</li>
-        {% endfor %}
-    {% else %}
-         <li>No categories available yet. Let's create some!</li>
-    {% endif %}
-</ul>
-
+        {% endblock %}
+    </div>
+</div>
 {% endblock %}
+
+
+
