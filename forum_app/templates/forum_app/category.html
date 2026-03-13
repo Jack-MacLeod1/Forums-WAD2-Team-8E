@@ -2,12 +2,27 @@
 
 {% block content %}
 <div class="central-content-box">
-    <div class="central-content">
+    <div class="central-content" style="padding: 20px;">
         {% if category %}
-            <h1 class="text-primary">{{ category.name }}</h1>
-            <p>Welcome to the {{ category.name }} forums! Posts will appear here soon.</p>
+            <h1 style="color: #333; border-bottom: 2px solid #ccc; padding-bottom: 10px;">{{ category.name }} Forums</h1>
+
+            {% if posts %}
+                <ul style="list-style-type: none; padding: 0;">
+                    {% for post in posts %}
+                        <li style="background: #f9f9f9; margin-bottom: 15px; padding: 15px; border-radius: 5px; border: 1px solid #ddd;">
+                            <h3><a href="#" style="text-decoration: none; color: #0056b3;">{{ post.title }}</a></h3>
+                            <p style="color: #666; font-size: 0.9em;">
+                                By {{ post.creator.username }} | Views: {{ post.views }} | Likes: {{ post.likes }}
+                            </p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p><strong>There are no posts in this category yet.</strong></p>
+            {% endif %}
+
         {% else %}
-            <h1 class="text-danger">Category Not Found</h1>
+            <h1 style="color: red;">Category Not Found</h1>
             <p>The category you are looking for does not exist.</p>
         {% endif %}
     </div>

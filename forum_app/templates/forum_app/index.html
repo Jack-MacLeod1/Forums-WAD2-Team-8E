@@ -14,7 +14,7 @@
             <ul>
             {% if categories %}
                 {% for category in categories %}
-                    <li><h2><a href="#">{{ category.name }}</a></h2></li>
+                    <li><h2><a href="{% url 'forum_app:show_category' category.slug %}">{{ category.name }}</a></h2></li>
                 {% endfor %}
             {% else %}
                 <li><h2>No categories yet!</h2></li>

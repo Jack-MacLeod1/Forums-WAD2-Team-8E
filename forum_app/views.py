@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.http import HttpResponse
+from forum_app.models import Category, Post
 
 def index(request):
     category_list = Category.objects.order_by()
@@ -68,13 +69,19 @@ def user_logout(request):
     logout(request)
     return redirect(reverse('forum_app:index'))
 
+
 def show_category(request, category_name_slug):
     context_dict = {}
     try:
         category = Category.objects.get(slug=category_name_slug)
         context_dict['category'] = category
+
+        posts = Post.objects.filter(category=category)
+        context_dict['posts'] = posts
+
     except Category.DoesNotExist:
         context_dict['category'] = None
+        context_dict['posts'] = None
 
     return render(request, 'forum_app/category.html', context_dict)
 
