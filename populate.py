@@ -36,7 +36,7 @@ def populate():
     
     for cat in cat_dict:
         for post in post_dict:
-            create_post(post, post_dict[post]["description"], post_dict[post]["views"], post_dict[post]["likes"], cat)
+            create_post(post, post_dict[post]["description"], post_dict[post]["views"], post_dict[post]["likes"], Category.objects.get(name=cat))
 
     
 
@@ -50,10 +50,11 @@ def create_category(name, desc, views, likes):
     return c
 
 def create_post(title, content, views, likes, category):
-    p = Post.objects.get_or_create(title = title, content = content, 
+    p = Post.objects.get_or_create(category = category,
+                                   creator = User.objects.get(username = "Jack"),
+                                   title = title, content = content, 
                                    views = views, likes = likes, 
-                                   category = category,
-                                   creator = User.objects.get(username = "Jack"))[0]
+                                   )[0]
     p.save()
     return p
 
