@@ -15,6 +15,7 @@ def index(request):
 
 def register(request):
     registered = False
+    category_list = Category.objects.order_by()
 
     if request.method == 'POST':
         user_form = UserForm(request.POST)
@@ -39,7 +40,8 @@ def register(request):
     context_dict = {
         'user_form': user_form,
         'profile_form': profile_form,
-        'registered': registered
+        'registered': registered,
+        'categories': category_list
     }
 
     return render(request, 'forum_app/register.html', context=context_dict)
@@ -47,6 +49,7 @@ def register(request):
 
 def user_login(request):
     error_msg = ""
+    category_list = Category.objects.order_by()
 
     if request.method == 'POST':
         user_name = request.POST.get('username')
@@ -63,7 +66,12 @@ def user_login(request):
         else:
             error_msg = "Invalid login details supplied."
 
-    return render(request, 'forum_app/login.html', {'error_msg': error_msg})
+    context_dict = {
+        'categories': category_list,
+        'error_msg': error_msg
+    }
+
+    return render(request, 'forum_app/login.html',  context=context_dict)
 
 def user_logout(request):
     logout(request)
@@ -71,7 +79,8 @@ def user_logout(request):
 
 
 def show_category(request, category_name_slug):
-    context_dict = {}
+    category_list = Category.objects.order_by()
+    context_dict = {'categories': category_list}
     try:
         category = Category.objects.get(slug=category_name_slug)
         context_dict['category'] = category
