@@ -1,0 +1,32 @@
+.category-header {
+    color: #333;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.post-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.post-item {
+    background: #f9f9f9;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.post-title a {
+    text-decoration: none;
+    color: #0056b3;
+}
+
+.post-meta {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.error-msg {
+    color: red;
+}
