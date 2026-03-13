@@ -10,24 +10,24 @@ from random import randint
 
 def populate():
     cat_dict = {"UK News" : {"description": "Current news stories of the UK",
-                "views": randint(0, 100),
-                "likes": randint(0, 100)},
+                "views": 50,
+                "likes": 51},
                 "UofG": {"description": "Everything University of Glasgow",
-                "views": randint(0, 100),
-                "likes": randint(0, 100)},
+                "views": 52,
+                "likes": 53},
                 "Sport": {"description": "Latest stories in Sport",
-                "views": randint(0, 100),
-                "likes": randint(0, 100)}}
+                "views": 54,
+                "likes": 55}}
     
     post_dict = {"post1": {"description": "This is some sample text describing the post content",
-                "views": randint(0, 100),
-                "likes": randint(0, 100)},
+                "views": 56,
+                "likes": 57},
                 "post2": {"description": "This is some more sample text describing the post content",
-                "views": randint(0, 100),
-                "likes": randint(0, 100)},
+                "views": 58,
+                "likes": 59},
                 "post3": {"description": "This is some more sample text describing the post content",
-                "views": randint(0, 100),
-                "likes": randint(0, 100)}}
+                "views": 60,
+                "likes": 61}}
     
 
 
