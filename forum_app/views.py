@@ -68,3 +68,13 @@ def user_logout(request):
     logout(request)
     return redirect(reverse('forum_app:index'))
 
+def show_category(request, category_name_slug):
+    context_dict = {}
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+        context_dict['category'] = category
+    except Category.DoesNotExist:
+        context_dict['category'] = None
+
+    return render(request, 'forum_app/category.html', context_dict)
+
