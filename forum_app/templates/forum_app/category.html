@@ -12,16 +12,6 @@
         <h1 class="category-header">{{ category.name }} Forums</h1>
 
         {% if posts %}
-            <ul class="post-list">
-                {% for post in posts %}
-                    <li class="post-item">
-                        <h3 class="post-title"><a href="#">{{ post.title }}</a></h3>
-                        <p class="post-meta">
-                            By {{ post.creator.username }} | Views: {{ post.views }} | Likes: {{ post.likes }}
-                        </p>
-                    </li>
-                {% endfor %}
-            </ul>
         {% else %}
             <p><strong>There are no posts in this category yet.</strong></p>
         {% endif %}
