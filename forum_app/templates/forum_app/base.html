@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
     {% block headblock %}
     {% endblock %}
 </head>
@@ -35,6 +36,23 @@
       </ul>
     </div>
   </nav>
+
+  <nav class="sidebar">
+    <header class="sidebar-header"><h2>Forums</h2></header>
+    <div class="sidebar-scrollbox">
+        <div class="sidebar-scrollbox-inner">
+            <ul>
+            {% if categories %}
+                {% for category in categories %}
+                    <li><h2><a href="{% url 'forum_app:show_category' category.slug %}">{{ category.name }}</a></h2></li>
+                {% endfor %}
+            {% else %}
+                <li><h2>No categories yet!</h2></li>
+            {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
 
     <div class="container mt-4">
         {% block content %}
