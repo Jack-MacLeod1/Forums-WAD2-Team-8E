@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from forum_app.models import UserProfile
+from forum_app.models import UserProfile, Post
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={"class":"password", "placeholder": "Enter password"}))
@@ -30,3 +30,12 @@ class UserProfileForm(forms.ModelForm):
         self.fields["bio"].widget.attrs["placeholder"] = "Enter something short to describe you!"
         self.fields["bio"].widget.attrs["maxlength"] = "100"
         self.fields["picture"].widget.attrs["class"] = "picture"
+
+
+class PostForm(forms.ModelForm):
+    title = forms.CharField(max_length=128, help_text="Title")
+    content = forms.CharField(widget=forms.Textarea, help_text="What's on your mind?")
+
+    class Meta:
+        model = Post
+        fields = ('title', 'content', 'image',)
