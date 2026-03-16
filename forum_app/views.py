@@ -1,11 +1,10 @@
-from django.shortcuts import render
-from forum_app.models import Category
-from forum_app.forms import UserForm, UserProfileForm
+from django.shortcuts import render, redirect
+from forum_app.forms import UserForm, UserProfileForm, PostForm
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import redirect
 from django.urls import reverse
 from django.http import HttpResponse
 from forum_app.models import Category, Post
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     category_list = Category.objects.order_by()
@@ -94,3 +93,35 @@ def show_category(request, category_name_slug):
 
     return render(request, 'forum_app/category.html', context_dict)
 
+
+@login_required
+def add_post(request, category_name_slug):
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+    except Category.DoesNotExist:
+        category = None
+
+    if category is None:
+        return redirect(reverse('forum_app:index'))
+
+    form = PostForm()
+
+    if request.method == 'POST':
+
+        form = PostForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            if category:
+                post = form.save(commit=False)
+                post.category = category
+                post.creator = request.user
+                post.views = 0
+                post.likes = 0
+                post.save()
+
+                return redirect(reverse('forum_app:show_category', kwargs={'category_name_slug': category_name_slug}))
+        else:
+            print(form.errors)
+
+    context_dict = {'form': form, 'category': category}
+    return render(request, 'forum_app/add_post.html', context_dict)
