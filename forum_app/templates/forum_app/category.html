@@ -16,6 +16,22 @@
         {% endif %}
 
         {% if posts %}
+            <div class="posts-list">
+                {% for post in posts %}
+                    <div class="post-item">
+                        <h3>{{ post.title }}</h3>
+                        <p>{{ post.content }}</p>
+
+                        <p class="post-meta">Posted by {{ post.creator.username }} | Views: {{ post.views }} | Likes: {{ post.likes }}</p>
+
+                        {% if post.image %}
+                            <div class="post-image-container">
+                                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image" />
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
         {% else %}
             <p><strong>There are no posts in this category yet.</strong></p>
         {% endif %}

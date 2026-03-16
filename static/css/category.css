@@ -44,3 +44,16 @@
 .add-post-btn:hover {
     background-color: #218838;
 }
+
+.post-item {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.post-meta {
+    font-size: 0.8em;
+    color: #666;
+}
