@@ -30,3 +30,17 @@
 .error-msg {
     color: red;
 }
+
+.add-post-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 8px 15px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.add-post-btn:hover {
+    background-color: #218838;
+}
