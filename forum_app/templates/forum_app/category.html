@@ -10,9 +10,10 @@
 {% block central-content %}
     {% if category %}
         <h1 class="category-header">{{ category.name }} Forums</h1>
-        <div style="margin-bottom: 20px;">
-            <a href="{% url 'forum_app:add_post' category.slug %}" class="add-post-btn">+ Add New Post</a>
-        </div>
+
+        {% if user.is_authenticated %}
+                <a href="{% url 'forum_app:add_post' category.slug %}" class="add-post-btn">+ Add New Post</a>
+        {% endif %}
 
         {% if posts %}
         {% else %}

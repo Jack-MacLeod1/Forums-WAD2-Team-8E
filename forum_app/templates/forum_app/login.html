@@ -14,7 +14,7 @@
         <form method="post" action="{% url 'forum_app:login' %}">
             {% csrf_token %}
             <div class="details">
-                Email: <div class="input"><input class="email" type="text" name="username" value="" size="50" placeholder="Enter email" /></div><br />
+                Username: <div class="input"><input class="username" type="text" name="username" value="" size="50" placeholder="Enter username" /></div><br />
             </div>
             <div class="details">
                 Password: <div class="input"><input class ="password" type="password" name="password" value="" size="50" placeholder="Enter password"/></div><br />
