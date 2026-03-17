@@ -122,6 +122,6 @@ def add_post(request, category_name_slug):
                 return redirect(reverse('forum_app:show_category', kwargs={'category_name_slug': category_name_slug}))
         else:
             print(form.errors)
-
-    context_dict = {'form': form, 'category': category}
+    category_list = Category.objects.order_by()
+    context_dict = {'form': form, 'category': category, "categories": category_list}
     return render(request, 'forum_app/add_post.html', context_dict)
