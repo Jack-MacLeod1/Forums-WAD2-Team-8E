@@ -1,0 +1,19 @@
+
+<div class="post">
+
+    <div class="post-header">
+        <span>T: {{ post.category.name }}</span>
+        <span>{{ post.creator.username }}</span>
+
+        {% if request.user == post.author %}
+            <button>Edit</button>
+        {% end if %}
+    </div>
+
+    <h3>{{ post.title }}</h3>
+
+    <div class="post-content">
+        {{ post.content }}
+    </div>
+
+</div>

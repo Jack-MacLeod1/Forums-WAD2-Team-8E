@@ -10,4 +10,5 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('category/<slug:category_name_slug>/', views.show_category, name='show_category'),
     path('category/<slug:category_name_slug>/add_post/', views.add_post, name='add_post'),
+    path("profile/<str:username>/", views.profile, name="profile"),
 ]

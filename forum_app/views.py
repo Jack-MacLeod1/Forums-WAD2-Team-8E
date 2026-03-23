@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from forum_app.forms import UserForm, UserProfileForm, PostForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.urls import reverse
 from django.http import HttpResponse
 from forum_app.models import Category, Post
 from django.contrib.auth.decorators import login_required
+
 
 def index(request):
     category_list = Category.objects.order_by()
@@ -93,6 +95,15 @@ def show_category(request, category_name_slug):
 
     return render(request, 'forum_app/category.html', context_dict)
 
+def profile(request, username):
+    profile_user = get_object_or_404(User, username=username)
+    posts = Post.objects.filter(creator=profile_user).order_by("-created_at")
+
+    return render(request, "forum_app/profile.html", {
+        "profile_user": profile_user,
+        "posts": posts
+    })
+    
 
 @login_required
 def add_post(request, category_name_slug):

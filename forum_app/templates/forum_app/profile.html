@@ -1,0 +1,37 @@
+{% extends "forum_app/base.html" %}
+{% load static %}
+
+
+{% block headblock %}
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="profile-container">
+
+    <div class="profile-header">
+        <div>
+            <h2>{{ profile_user.username }}</h2>
+            <p>User since {{ profile_user.date_joined|date:"d/m/Y" }}</p>
+        </div>
+
+        {% if request.user == profile_user %}
+            <button>Edit Profile</button>
+        {% endif %}
+    </div>
+
+    <div class="middle-box">
+        {% for post in posts %}
+            {% include "forum_app/post.html" %}
+        
+        {% empty %}
+            <p>No posts yet.</p>
+        {% endfor %}
+    </div>
+    
+</div>
+
+{% endblock %}
+
