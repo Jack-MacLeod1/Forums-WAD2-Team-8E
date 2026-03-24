@@ -106,8 +106,9 @@ def profile(request, username):
 
 
 def show_post(request, post_id):
+    category_list = Category.objects.order_by()
     post = Post.objects.get(id=post_id)
-    context_dict = {'post': post}
+    context_dict = {'post': post, "categories": category_list}
     return render(request, 'forum_app/post.html', context_dict)
 
 
