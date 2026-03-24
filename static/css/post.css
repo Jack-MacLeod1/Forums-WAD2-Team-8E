@@ -1,26 +1,13 @@
-.category-header {
-    color: #333;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 10px;
-}
-
-.post-list {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style-type: none;
-    padding: 0;
-}
-
 .post-item {
     background: #eeeeee;
-    margin-top: 30px;
+    margin-top: 100px;
     margin-left: 40px;
     padding: 15px;
     padding-right: 0;
     border: 2px solid black;
     border-radius: 2px;
     width: 1300px;
+    min-height: 250px;
 }
 
 .post-top-info {
@@ -37,14 +24,9 @@
     padding-bottom: 5px;
     padding-top: 5px;
     padding-left: 10px;
-    min-width: 396px;
-    max-width: 396px;
+    min-width: 400px;
+    max-width: 400px;
     border: 2px solid black;
-    color: rgb(112, 189, 215);
-}
-
-.post-topic:hover{
-    color: lightblue;
 }
 
 .poster {
@@ -53,8 +35,8 @@
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 10px;
-    min-width: 400px; 
-    max-width: 400px;
+    min-width: 500px; 
+    max-width: 500px;
     margin-left: -2px;
     margin-right: -2px;
     border: 2px solid black;
@@ -69,12 +51,6 @@
     width: 200px;
     min-width: 200px;
     border: 2px solid black;
-}
-
-.post-date {
-    padding-left: 20px;
-    font-family: cursive;
-    font-size: 20px;
 }
 
 .post-second-row{
@@ -113,6 +89,7 @@
 
 .post-title:hover{
     color: lightblue;
+    border: 2px solid black;
 }
 
 .post-meta {
@@ -136,32 +113,4 @@
     font-size: 18px;
     font-family: cursive;
 
-}
-
-.error-msg {
-    color: red;
-}
-
-.add-post-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: cursive;
-    font-size: 15px;
-    color: black;
-    border: 2px solid black;
-    width: 150px;
-    height: 30px;
-    background-color: #f9cb9c;
-    cursor: pointer;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-.add-post-btn:hover {
-    background-color: #faf2e2;
-}
-
-.posthtml-gap {
-    height: 40px;
 }

@@ -105,6 +105,23 @@ def profile(request, username):
         "posts": posts,
         "categories": categories,
     })
+
+
+def show_post(request, post_id):
+    category_list = Category.objects.order_by()
+    post = Post.objects.get(id=post_id)
+    context_dict = {'post': post, "categories": category_list}
+    return render(request, 'forum_app/post.html', context_dict)
+
+
+def profile(request, username):
+    profile_user = get_object_or_404(User, username=username)
+    posts = Post.objects.filter(creator=profile_user).order_by("-created_at")
+
+    return render(request, "forum_app/profile.html", {
+        "profile_user": profile_user,
+        "posts": posts
+    })
     
 
 @login_required
