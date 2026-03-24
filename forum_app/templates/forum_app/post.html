@@ -1,19 +1,15 @@
+{% extends "forum_app/index.html" %}
+{% load static %}
 
-<div class="post">
+{% block headblock %}
+    <title>Forums</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/post.css' %}">
+{% endblock %}
 
-    <div class="post-header">
-        <span>T: {{ post.category.name }}</span>
-        <span>{{ post.creator.username }}</span>
+{% block central-content %}
+<p>Hello world</p>
 
-        {% if request.user == post.author %}
-            <button>Edit</button>
-        {% end if %}
-    </div>
+<!-- CONTENT HERE -->
 
-    <h3>{{ post.title }}</h3>
-
-    <div class="post-content">
-        {{ post.content }}
-    </div>
-
-</div>
+{% endblock %}

@@ -49,14 +49,13 @@
     position: relative;
     left: 260px;
     width: calc(100% - 260px);
-    height: 100vh;
     margin-top: 40px;
     display: flex;
 
 }
 
 .central-content{
-    margin: 10px;
+    margin: 20px;
 }
 
 .example{

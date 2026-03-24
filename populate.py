@@ -29,7 +29,14 @@ def populate():
                 "likes": 59},
                 "post3": {"description": "This is some more sample text describing the post content",
                 "views": 60,
-                "likes": 61}}
+                "likes": 61},
+                "post4": {"description": "Here is a post with some longer text in it. Hopefully this reveals any flaws as longer posts are made... \
+                          but you just never know. This is some more sample text describing the post content. This is even more sample text \
+                          describing the post content. Well isn't that just smashing. I've truly dedicated a lot of effort into this post, so \
+                          I sure do hope that myself and my other two (working) teammates don't get dragged down by some people who make no effort \
+                          to help whatsoever... but then again, who knows?",
+                          "views": 65,
+                          "likes": 64}}
     
     comment_dict = {"c1": {"content": "This is some sample text describing c1 content",
                            "likes": 12},

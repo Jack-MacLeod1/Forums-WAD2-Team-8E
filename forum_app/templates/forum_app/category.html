@@ -19,16 +19,23 @@
             <div class="posts-list">
                 {% for post in posts %}
                     <div class="post-item">
-                        <h3>{{ post.title }}</h3>
-                        <p>{{ post.content }}</p>
+                        <div class="post-top-info">
+                            <p class="post-topic">Topic: {{ post.category }}</p>
+                            <p class="poster">Posted by {{ post.creator.username }} </p>
+                            <p class="post-views">Views: {{ post.views }} </p>
+                        </div>
+                        <div class="post-second-row">
+                            <a class="post-title" href="{% url 'forum_app:show_post' post.id %}">{{ post.title }}</a>
+                            <p class="post-likes">Likes: {{ post.likes }} </p>
+                        </div>
 
-                        <p class="post-meta">Posted by {{ post.creator.username }} | Views: {{ post.views }} | Likes: {{ post.likes }}</p>
 
                         {% if post.image %}
                             <div class="post-image-container">
-                                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image" />
+                                <img class="post-image" src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image" />
                             </div>
                         {% endif %}
+                        <p class="post-content">{{ post.content }}</p>
                     </div>
                 {% endfor %}
             </div>

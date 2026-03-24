@@ -103,6 +103,22 @@ def profile(request, username):
         "profile_user": profile_user,
         "posts": posts
     })
+
+
+def show_post(request, post_id):
+    post = Post.objects.get(id=post_id)
+    context_dict = {'post': post}
+    return render(request, 'forum_app/post.html', context_dict)
+
+
+def profile(request, username):
+    profile_user = get_object_or_404(User, username=username)
+    posts = Post.objects.filter(creator=profile_user).order_by("-created_at")
+
+    return render(request, "forum_app/profile.html", {
+        "profile_user": profile_user,
+        "posts": posts
+    })
     
 
 @login_required
