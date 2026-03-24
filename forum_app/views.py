@@ -98,10 +98,12 @@ def show_category(request, category_name_slug):
 def profile(request, username):
     profile_user = get_object_or_404(User, username=username)
     posts = Post.objects.filter(creator=profile_user).order_by("-created_at")
+    categories = Category.objects.all()
 
     return render(request, "forum_app/profile.html", {
         "profile_user": profile_user,
-        "posts": posts
+        "posts": posts,
+        "categories": categories,
     })
     
 

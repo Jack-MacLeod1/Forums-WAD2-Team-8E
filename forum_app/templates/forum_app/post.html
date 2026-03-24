@@ -5,15 +5,18 @@
         <span>T: {{ post.category.name }}</span>
         <span>{{ post.creator.username }}</span>
 
-        {% if request.user == post.author %}
+        {% if request.user == post.creator %}
             <button>Edit</button>
-        {% end if %}
+        {% endif %}
     </div>
 
     <h3>{{ post.title }}</h3>
 
+    
+
     <div class="post-content">
         {{ post.content }}
+            {{ post.votes }}
     </div>
 
 </div>
