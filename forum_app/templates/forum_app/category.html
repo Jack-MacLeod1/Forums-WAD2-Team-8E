@@ -21,7 +21,7 @@
                     <div class="post-item">
                         <div class="post-top-info">
                             <a class="post-topic" href="{% url 'forum_app:show_category' category.slug %}">Topic: {{ post.category }}</a>
-                            <p class="poster">Posted by {{ post.creator.username }} </p>
+                            <a class="poster" href="{% url 'forum_app:profile' post.creator.username %}">Posted by {{ post.creator.username }} </a>
                             <p class="post-views">Views: {{ post.views }} </p>
                             <p class="post-date">{{ post.created_at }}</p>
                         </div>

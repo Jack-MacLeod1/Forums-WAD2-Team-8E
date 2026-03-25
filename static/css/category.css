@@ -58,6 +58,11 @@
     margin-left: -2px;
     margin-right: -2px;
     border: 2px solid black;
+    color: rgb(112, 189, 215);
+}
+
+.poster:hover{
+    color:lightblue;
 }
 
 .post-views{
