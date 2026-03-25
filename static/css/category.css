@@ -196,7 +196,8 @@
 }
 
 .comment-textarea {
-    width: 100%;
+    width: 90%;
+    max-width: 90%;
     padding: 10px;
     border: 2px solid black;
     border-radius: 5px;
@@ -207,6 +208,7 @@
 .login-warning {
     background-color: #f8d7da;
     padding: 15px;
+    width: 96%;
     border: 2px solid #f5c6cb;
     border-radius: 5px;
     text-align: center;

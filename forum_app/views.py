@@ -113,8 +113,14 @@ def show_post(request, post_id):
     category_list = Category.objects.order_by()
     post = get_object_or_404(Post, id=post_id)
 
-    post.views += 1
-    post.save()
+    if 'viewed_posts' not in request.session:
+        request.session['viewed_posts'] = []
+
+    if post.id not in request.session['viewed_posts']:
+        post.views += 1
+        post.save()
+        request.session['viewed_posts'].append(post.id)
+        request.session.modified = True 
 
     comments = Comment.objects.filter(post=post).order_by('-created_at')
 
