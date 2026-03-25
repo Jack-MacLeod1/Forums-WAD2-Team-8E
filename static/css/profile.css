@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com');
 
 main {
     margin-left: 260px;
@@ -60,5 +61,5 @@ button {
     background-color: #f9cb9c;
     border-radius: 5px;
     cursor: pointer;
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
 }

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com');
+
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -23,7 +25,7 @@
 .sidebar-header{
     color: black;
     background-color: #f9cb9c;
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
     top: 0px;
     height: 70px;
     border-bottom: 3px solid black;
@@ -38,7 +40,7 @@
 
 .sidebar-scrollbox-inner li{
     color: black;
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
     top: 0px;
     display: flex;
     justify-content: center;

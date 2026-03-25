@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com');
+
 body {
     margin: 0;
     padding: 0;
@@ -7,7 +9,7 @@ body {
 
 .navbar {
     background: #66dbff;
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
     padding-right: 15px;
     padding-left: 15px;
     border: 3px solid black ;
@@ -46,11 +48,11 @@ li a {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
     font-size: 15px;
     color: black;
     border: 2px solid black;
-    width: 65px;
+    width: 100px;
     height: 30px;
     background-color: #f9cb9c;
     cursor: pointer;
@@ -84,7 +86,7 @@ li a:hover{
     background-color: #f9cb9c;
     border-radius: 5px;
     cursor: pointer;
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
 }
 
 .search-btn:hover{

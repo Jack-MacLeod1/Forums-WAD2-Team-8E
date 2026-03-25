@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com');
+
 .category-header {
     color: #333;
     border-bottom: 2px solid #ccc;
@@ -32,7 +34,7 @@
 
 .post-topic{
     margin-left: -17px;
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
     font-size: 20px;
     padding-bottom: 5px;
     padding-top: 5px;
@@ -48,7 +50,7 @@
 }
 
 .poster {
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
     font-size: 20px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -66,7 +68,7 @@
 }
 
 .post-views{
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
     font-size: 20px;
     padding-bottom: 5px;
     padding-top: 5px;
@@ -78,7 +80,7 @@
 
 .post-date {
     padding-left: 20px;
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
     font-size: 20px;
 }
 
@@ -91,7 +93,7 @@
 
 .post-title{
     margin-left: -17px;
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
     font-size: 20px;
     color: rgb(112, 189, 215);
     padding-bottom: 5px;
@@ -104,7 +106,7 @@
 }
 
 .post-likes {
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
     font-size: 20px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -139,7 +141,7 @@
 
 .post-content{
     font-size: 18px;
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
 
 }
 
@@ -151,7 +153,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
     font-size: 15px;
     color: black;
     border: 2px solid black;
@@ -189,7 +191,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
 }
 
 .like-btn:hover, .submit-comment-btn:hover {
@@ -206,7 +208,7 @@
     padding: 10px;
     border: 2px solid black;
     border-radius: 5px;
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
     resize: vertical;
 }
 
@@ -222,7 +224,7 @@
 
 .login-warning p {
     margin: 0;
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
 }
 
 .login-warning a {
@@ -256,7 +258,7 @@
 
 .comment-content {
     margin: 0;
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
 }
 
 .no-comments-msg {
