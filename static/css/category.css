@@ -1,9 +1,8 @@
 @import url('https://fonts.googleapis.com');
 
 .category-header {
-    color: #333;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 10px;
+    color: black;
+    font-family: "Playpen Sans", cursive;
 }
 
 .post-list {
@@ -39,8 +38,8 @@
     padding-bottom: 5px;
     padding-top: 5px;
     padding-left: 10px;
-    min-width: 396px;
-    max-width: 396px;
+    min-width: 300px;
+    max-width: 300px;
     border: 2px solid black;
     color: rgb(112, 189, 215);
 }
@@ -55,8 +54,8 @@
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 10px;
-    min-width: 400px; 
-    max-width: 400px;
+    min-width: 350px; 
+    max-width: 350px;
     margin-left: -2px;
     margin-right: -2px;
     border: 2px solid black;
