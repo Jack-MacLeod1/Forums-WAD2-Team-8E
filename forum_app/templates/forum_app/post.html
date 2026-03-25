@@ -1,4 +1,37 @@
-{% if user.is_authenticated %}
+{% extends "forum_app/index.html" %}
+{% load static %}
+
+{% block headblock %}
+<title>{{ post.title }} - Forums</title>
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/category.css' %}">
+{% endblock %}
+
+{% block central-content %}
+<p class="posthtml-gap"></p>
+<div class="post-item">
+    <div class="post-top-info">
+        <a class="post-topic" href="{% url 'forum_app:show_category' post.category.slug %}">Topic: {{ post.category.name }}</a>
+        <p class="poster">Posted by {{ post.creator.username }} </p>
+        <p class="post-views">Views: {{ post.views }} </p>
+        <p class="post-date">{{ post.created_at|date:"Y-m-d H:i" }}</p>
+    </div>
+
+    <div class="post-second-row">
+        <a class="post-title" href="{% url 'forum_app:show_post' post.id %}">{{ post.title }}</a>
+        <p class="post-likes">Likes: {{ post.likes }} </p>
+    </div>
+
+    {% if post.image %}
+    <div class="post-image-container">
+        <img class="post-image" src="{{ post.image.url }}" alt="{{ post.title }}" />
+    </div>
+    {% endif %}
+
+    <p class="post-content">{{ post.content }}</p>
+    <hr class="post-divider">
+
+    {% if user.is_authenticated %}
         <div class="post-interactions">
             <form action="{% url 'forum_app:like_post' post.id %}" method="post" class="like-form">
                 {% csrf_token %}
@@ -24,19 +57,21 @@
 
     <hr class="post-divider">
 
-    <div class="comments-display-section" style="margin-top: 30px;">
+    <div class="comments-display-section">
         <h3>Comments ({{ comments.count }})</h3>
         {% if comments %}
             {% for comment in comments %}
-                <div class="single-comment" style="background-color: #f9f9f9; padding: 15px; margin-bottom: 10px; border-left: 4px solid #f9cb9c; border-radius: 4px;">
-                    <p style="margin: 0 0 5px 0; font-size: 0.9em; color: #555;">
+                <div class="single-comment">
+                    <p class="comment-meta">
                         <strong>{{ comment.creator.username }}</strong>
-                        <span style="font-size: 0.8em; margin-left: 10px;">{{ comment.created_at|date:"Y-m-d H:i" }}</span>
+                        <span>{{ comment.created_at|date:"Y-m-d H:i" }}</span>
                     </p>
-                    <p style="margin: 0; font-family: cursive;">{{ comment.content }}</p>
+                    <p class="comment-content">{{ comment.content }}</p>
                 </div>
             {% endfor %}
         {% else %}
-            <p style="color: #888; font-style: italic;">No comments yet. Be the first to share your thoughts!</p>
+            <p class="no-comments-msg">No comments yet. Be the first to share your thoughts!</p>
         {% endif %}
     </div>
+</div>
+{% endblock %}

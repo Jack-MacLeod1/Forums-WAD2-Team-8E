@@ -223,3 +223,36 @@
     font-weight: bold;
     text-decoration: underline;
 }
+
+.comments-display-section {
+    margin-top: 30px;
+}
+
+.single-comment {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-left: 4px solid #f9cb9c; /* 呼应你的主题色 */
+    border-radius: 4px;
+}
+
+.comment-meta {
+    margin: 0 0 5px 0;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.comment-meta span {
+    font-size: 0.8em;
+    margin-left: 10px;
+}
+
+.comment-content {
+    margin: 0;
+    font-family: cursive;
+}
+
+.no-comments-msg {
+    color: #888;
+    font-style: italic;
+}
