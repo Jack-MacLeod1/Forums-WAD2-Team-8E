@@ -35,8 +35,15 @@
         <div class="post-interactions">
             <form action="{% url 'forum_app:like_post' post.id %}" method="post" class="like-form">
                 {% csrf_token %}
-                <button type="submit" class="like-btn">
-                    ❤️ Like ({{ post.likes }})
+                <button type="submit" class="like-btn" {% if has_liked %}style="background-color: #ffdde0;"{% endif %}>
+
+                    {% if has_liked %}
+                        <i class="fa-solid fa-heart" style="color: red;"></i> Liked
+                    {% else %}
+                        <i class="fa-regular fa-heart"></i> Like
+                    {% endif %}
+
+                    ({{ post.likes }})
                 </button>
             </form>
 

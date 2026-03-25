@@ -112,16 +112,40 @@ def profile(request, username):
 def show_post(request, post_id):
     category_list = Category.objects.order_by()
     post = get_object_or_404(Post, id=post_id)
+
     post.views += 1
     post.save()
+
     comments = Comment.objects.filter(post=post).order_by('-created_at')
+
+    has_liked = False
+    if request.user.is_authenticated:
+        if post.likers.filter(id=request.user.id).exists():
+            has_liked = True
 
     context_dict = {
         'post': post,
         'categories': category_list,
         'comments': comments,
+        'has_liked': has_liked,
     }
     return render(request, 'forum_app/post.html', context_dict)
+
+
+@login_required
+def like_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+
+        if post.likers.filter(id=request.user.id).exists():
+            post.likers.remove(request.user)
+            post.likes -= 1
+        else:
+            post.likers.add(request.user)
+            post.likes += 1
+        post.save()
+
+    return redirect('forum_app:show_post', post_id=post.id)
 
 
 @login_required
@@ -155,15 +179,6 @@ def add_post(request, category_name_slug):
     category_list = Category.objects.order_by()
     context_dict = {'form': form, 'category': category, "categories": category_list}
     return render(request, 'forum_app/add_post.html', context_dict)
-
-
-@login_required
-def like_post(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    if request.method == 'POST':
-        post.likes += 1
-        post.save()
-    return redirect('forum_app:show_post', post_id=post.id)
 
 
 @login_required
