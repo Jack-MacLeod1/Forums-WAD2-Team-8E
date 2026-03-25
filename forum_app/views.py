@@ -6,11 +6,16 @@ from django.urls import reverse
 from django.http import HttpResponse
 from forum_app.models import Category, Post, Comment
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+from datetime import timedelta
 
 
 def index(request):
     category_list = Category.objects.order_by()
-    context_dict = {'categories': category_list}
+    now = timezone.now()
+    three_days_ago = now - timedelta(days=3)
+    recent_posts = Post.objects.filter(created_at__gte=three_days_ago).order_by("-likes")
+    context_dict = {'categories': category_list, "posts": recent_posts}
     return render(request, 'forum_app/index.html', context=context_dict)
 
 

@@ -4,6 +4,7 @@
 {% block headblock %}
     <title>Forums</title>
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/category.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -12,8 +13,34 @@
 <div class="central-content-box">
     <div class="central-content">
         {% block central-content %}
-            <h1 class="example">Welcome to Team 8E Forums!</h1>
-            <p>Please select a category from the sidebar to start exploring.</p>
+            {% if posts %}
+            <div class="posts-list">
+                {% for post in posts %}
+                    <div class="post-item">
+                        <div class="post-top-info">
+                            <a class="post-topic" href="{% url 'forum_app:show_category' post.category.slug %}">Topic: {{ post.category }}</a>
+                            <a class="poster" href="{% url 'forum_app:profile' post.creator.username %}">Posted by {{ post.creator.username }} </a>
+                            <p class="post-views">Views: {{ post.views }} </p>
+                            <p class="post-date">{{ post.created_at }}</p>
+                        </div>
+                        <div class="post-second-row">
+                            <a class="post-title" href="{% url 'forum_app:show_post' post.id %}">{{ post.title }}</a>
+                            <p class="post-likes">Likes: {{ post.likes }} </p>
+                        </div>
+
+
+                        {% if post.image %}
+                            <div class="post-image-container">
+                                <img class="post-image" src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image" />
+                            </div>
+                        {% endif %}
+                        <p class="post-content">{{ post.content }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p><strong>There are no posts!</strong></p>
+        {% endif %}
         {% endblock %}
     </div>
 </div>

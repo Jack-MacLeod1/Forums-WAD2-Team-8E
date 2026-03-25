@@ -9,6 +9,8 @@ from forum_app.models import Category, Post, Comment, User, UserProfile
 from django.contrib.auth import get_user_model
 import requests
 from django.core.files.base import ContentFile
+from datetime import timedelta
+from django.utils import timezone
 
 def populate():
     create_sample_user_and_profile()
@@ -48,7 +50,8 @@ def populate():
                     aspire to that level of stability.",
                           "views": 65,
                           "likes": 41,
-                          "img_url": "https://pbs.twimg.com/media/FZW22-ZUYAAC22n.png"}}
+                          "img_url": "https://pbs.twimg.com/media/FZW22-ZUYAAC22n.png",
+                          "created_at": timezone.now() - timedelta(days=10)}}
     
     comment_dict = {"c1": {"content": "This is some sample text describing c1 content",
                            "likes": 12},
@@ -72,8 +75,11 @@ def populate():
                     p.image.save(file_name, ContentFile(image_obtainer.content), save = True)
                 else:
                     print("Error obtaining " + str(post["img_url"]))
-                    create_post(post, post_dict[post]["description"], post_dict[post]["views"], 
+                    p = create_post(post, post_dict[post]["description"], post_dict[post]["views"], 
                             post_dict[post]["likes"], Category.objects.get(name=cat))
+                if "created_at" in post_dict[post]:
+                    p.created_at = post_dict[post]["created_at"]
+                    p.save()
             else:
                 create_post(post, post_dict[post]["description"], post_dict[post]["views"], 
                             post_dict[post]["likes"], Category.objects.get(name=cat))
