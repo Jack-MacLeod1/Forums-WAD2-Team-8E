@@ -30,7 +30,7 @@
     </div>
       <ul class="nav-right">
         {% if user.is_authenticated %}
-            <li><span style="color: white; margin-right: 15px; font-weight: bold;">Welcome, {{ user.username }}!</span></li>
+            <li><a href="{% url 'forum_app:profile' user.username %}"><i class="fa fa-user" aria-hidden="true"></i></a></li>
             <li><a class="login-button" href="{% url 'forum_app:logout' %}">Log Out</a></li>
         {% else %}
             <li><a class="login-button" href="{% url 'forum_app:login' %}">Log In</a></li>
