@@ -72,7 +72,8 @@ def user_login(request):
         'error_msg': error_msg
     }
 
-    return render(request, 'forum_app/login.html',  context=context_dict)
+    return render(request, 'forum_app/login.html', context=context_dict)
+
 
 def user_logout(request):
     logout(request)
@@ -95,6 +96,7 @@ def show_category(request, category_name_slug):
 
     return render(request, 'forum_app/category.html', context_dict)
 
+
 def profile(request, username):
     profile_user = get_object_or_404(User, username=username)
     posts = Post.objects.filter(creator=profile_user).order_by("-created_at")
@@ -109,20 +111,14 @@ def profile(request, username):
 
 def show_post(request, post_id):
     category_list = Category.objects.order_by()
-    post = Post.objects.get(id=post_id)
-    context_dict = {'post': post, "categories": category_list}
+    post = get_object_or_404(Post, id=post_id)
+
+    context_dict = {
+        'post': post,
+        'categories': category_list
+    }
     return render(request, 'forum_app/post.html', context_dict)
 
-
-def profile(request, username):
-    profile_user = get_object_or_404(User, username=username)
-    posts = Post.objects.filter(creator=profile_user).order_by("-created_at")
-
-    return render(request, "forum_app/profile.html", {
-        "profile_user": profile_user,
-        "posts": posts
-    })
-    
 
 @login_required
 def add_post(request, category_name_slug):
@@ -137,7 +133,6 @@ def add_post(request, category_name_slug):
     form = PostForm()
 
     if request.method == 'POST':
-
         form = PostForm(request.POST, request.FILES)
 
         if form.is_valid():
@@ -152,6 +147,7 @@ def add_post(request, category_name_slug):
                 return redirect(reverse('forum_app:show_category', kwargs={'category_name_slug': category_name_slug}))
         else:
             print(form.errors)
+
     category_list = Category.objects.order_by()
     context_dict = {'form': form, 'category': category, "categories": category_list}
     return render(request, 'forum_app/add_post.html', context_dict)

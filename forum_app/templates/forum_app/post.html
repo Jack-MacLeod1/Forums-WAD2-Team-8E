@@ -1,7 +1,8 @@
 {% extends "forum_app/index.html" %}
 {% load static %}
+
 {% block headblock %}
-<title>Forums</title>
+<title>{{ post.title }} - Forums</title>
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
 <link rel="stylesheet" href="{% static 'css/category.css' %}">
 {% endblock %}
@@ -10,20 +11,49 @@
 <p class="posthtml-gap"></p>
 <div class="post-item">
     <div class="post-top-info">
-        <a class="post-topic" href="{% url 'forum_app:show_category' post.category.slug %}">Topic: {{ post.category }}</a>
+        <a class="post-topic" href="{% url 'forum_app:show_category' post.category.slug %}">Topic: {{ post.category.name }}</a>
         <p class="poster">Posted by {{ post.creator.username }} </p>
         <p class="post-views">Views: {{ post.views }} </p>
-        <p class="post-date">{{ post.created_at }}</p>
+        <p class="post-date">{{ post.created_at|date:"Y-m-d H:i" }}</p>
     </div>
+
     <div class="post-second-row">
         <a class="post-title" href="{% url 'forum_app:show_post' post.id %}">{{ post.title }}</a>
         <p class="post-likes">Likes: {{ post.likes }} </p>
     </div>
+
     {% if post.image %}
     <div class="post-image-container">
         <img class="post-image" src="{{ post.image.url }}" alt="{{ post.title }}" />
     </div>
     {% endif %}
+
     <p class="post-content">{{ post.content }}</p>
+
+    <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+
+    {% if user.is_authenticated %}
+        <div class="post-interactions">
+            <form action="#" method="post" style="display:inline-block; margin-bottom: 15px;">
+                {% csrf_token %}
+                <button type="submit" class="like-btn" style="cursor: pointer; padding: 5px 15px; background-color: #f9cb9c; border: 2px solid black; border-radius: 5px; font-weight: bold;">
+                    ❤️ Like ({{ post.likes }})
+                </button>
+            </form>
+
+            <form action="#" method="post">
+                {% csrf_token %}
+                <textarea name="comment_text" rows="3" style="width: 100%; padding: 10px; border: 2px solid black; border-radius: 5px;" placeholder="Write a comment..." required></textarea>
+                <button type="submit" style="margin-top: 10px; padding: 5px 15px; background-color: #f9cb9c; border: 2px solid black; border-radius: 5px; cursor: pointer;">
+                    Post Comment
+                </button>
+            </form>
+        </div>
+    {% else %}
+        <div class="login-warning" style="background-color: #f8d7da; padding: 15px; border: 2px solid #f5c6cb; border-radius: 5px; text-align: center; color: #721c24;">
+            <p style="margin: 0; font-family: cursive;">You must be logged in to like or comment. <br>
+            <a href="{% url 'forum_app:login' %}" style="color: #ee0000; font-weight: bold; text-decoration: underline;">Log In Here</a></p>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

@@ -87,6 +87,7 @@ def create_post(title, content, views, likes, category):
                                    title = title, content = content, 
                                    views = views, likes = likes, 
                                    )[0]
+    p.slug = slugify(title)
     p.save()
     return p
 
