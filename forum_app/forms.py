@@ -33,9 +33,18 @@ class UserProfileForm(forms.ModelForm):
 
 
 class PostForm(forms.ModelForm):
-    title = forms.CharField(max_length=128, help_text="Title")
-    content = forms.CharField(widget=forms.Textarea, help_text="What's on your mind?")
+    title = forms.CharField(max_length=128)
+    content = forms.CharField(widget=forms.Textarea)
 
     class Meta:
         model = Post
-        fields = ('title', 'content', 'image',)
+        fields = ('title', 'image', 'content',)
+
+    def __init__(self, *args, **kwargs):
+        super(PostForm, self).__init__(*args, **kwargs)
+        self.fields["title"].widget.attrs["class"] = "post-form-title"
+        self.fields["title"].widget.attrs["placeholder"] = "Title"
+        self.fields["content"].widget.attrs["class"] = "post-form-content"
+        self.fields["content"].widget.attrs["placeholder"] = "Share your thoughts"
+        self.fields["image"].widget.attrs["class"] = "post-form-image"
+        self.fields["image"].widget.attrs["placeholder"] = "Drag and Drop media here!"
