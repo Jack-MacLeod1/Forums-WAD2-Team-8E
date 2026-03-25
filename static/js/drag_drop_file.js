@@ -7,12 +7,13 @@ const imageView = document.getElementById("id_image");
 inputFile.addEventListener("change", uploadImage);
 
 function uploadImage(){
-    imageView.parentNode.querySelectorAll("img").forEach(img => img.remove());
+    
+    imageView.parentNode.querySelectorAll("img").forEach(img => img.remove()); // Used in the "swapping" of images if more than one is uploaded - we only want 1
     let imgLink = URL.createObjectURL(inputFile.files[0]);
 
     let img = document.createElement("img");
     img.src = imgLink;
-    img.style.maxWidth = "500px";
+    img.style.maxWidth = "500px"; // Ensure the image fits in the space
     img.style.maxHeight = "190px";
     img.style.objectFit = "contain";
 
