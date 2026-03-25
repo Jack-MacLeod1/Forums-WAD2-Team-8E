@@ -30,29 +30,29 @@
 
     <p class="post-content">{{ post.content }}</p>
 
-    <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+    <hr class="post-divider">
 
     {% if user.is_authenticated %}
         <div class="post-interactions">
-            <form action="#" method="post" style="display:inline-block; margin-bottom: 15px;">
+            <form action="#" method="post" class="like-form">
                 {% csrf_token %}
-                <button type="submit" class="like-btn" style="cursor: pointer; padding: 5px 15px; background-color: #f9cb9c; border: 2px solid black; border-radius: 5px; font-weight: bold;">
+                <button type="submit" class="like-btn">
                     ❤️ Like ({{ post.likes }})
                 </button>
             </form>
 
-            <form action="#" method="post">
+            <form action="#" method="post" class="comment-form">
                 {% csrf_token %}
-                <textarea name="comment_text" rows="3" style="width: 100%; padding: 10px; border: 2px solid black; border-radius: 5px;" placeholder="Write a comment..." required></textarea>
-                <button type="submit" style="margin-top: 10px; padding: 5px 15px; background-color: #f9cb9c; border: 2px solid black; border-radius: 5px; cursor: pointer;">
+                <textarea name="comment_text" rows="3" class="comment-textarea" placeholder="Write a comment..." required></textarea>
+                <button type="submit" class="submit-comment-btn">
                     Post Comment
                 </button>
             </form>
         </div>
     {% else %}
-        <div class="login-warning" style="background-color: #f8d7da; padding: 15px; border: 2px solid #f5c6cb; border-radius: 5px; text-align: center; color: #721c24;">
-            <p style="margin: 0; font-family: cursive;">You must be logged in to like or comment. <br>
-            <a href="{% url 'forum_app:login' %}" style="color: #ee0000; font-weight: bold; text-decoration: underline;">Log In Here</a></p>
+        <div class="login-warning">
+            <p>You must be logged in to like or comment. <br>
+            <a href="{% url 'forum_app:login' %}">Log In Here</a></p>
         </div>
     {% endif %}
 </div>

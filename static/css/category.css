@@ -165,3 +165,61 @@
 .posthtml-gap {
     height: 40px;
 }
+
+.post-divider {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.like-form {
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.like-btn, .submit-comment-btn {
+    padding: 5px 15px;
+    background-color: #f9cb9c;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: cursive;
+}
+
+.like-btn:hover, .submit-comment-btn:hover {
+    background-color: #faf2e2;
+}
+
+.submit-comment-btn {
+    margin-top: 10px;
+}
+
+.comment-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-family: cursive;
+    resize: vertical;
+}
+
+.login-warning {
+    background-color: #f8d7da;
+    padding: 15px;
+    border: 2px solid #f5c6cb;
+    border-radius: 5px;
+    text-align: center;
+    color: #721c24;
+}
+
+.login-warning p {
+    margin: 0;
+    font-family: cursive;
+}
+
+.login-warning a {
+    color: #ee0000;
+    font-weight: bold;
+    text-decoration: underline;
+}
