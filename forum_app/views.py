@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.http import HttpResponse
-from forum_app.models import Category, Post
+from forum_app.models import Category, Post, Comment
 from django.contrib.auth.decorators import login_required
 
 
@@ -112,10 +112,14 @@ def profile(request, username):
 def show_post(request, post_id):
     category_list = Category.objects.order_by()
     post = get_object_or_404(Post, id=post_id)
+    post.views += 1
+    post.save()
+    comments = Comment.objects.filter(post=post).order_by('-created_at')
 
     context_dict = {
         'post': post,
-        'categories': category_list
+        'categories': category_list,
+        'comments': comments,
     }
     return render(request, 'forum_app/post.html', context_dict)
 
@@ -151,3 +155,22 @@ def add_post(request, category_name_slug):
     category_list = Category.objects.order_by()
     context_dict = {'form': form, 'category': category, "categories": category_list}
     return render(request, 'forum_app/add_post.html', context_dict)
+
+
+@login_required
+def like_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+        post.likes += 1
+        post.save()
+    return redirect('forum_app:show_post', post_id=post.id)
+
+
+@login_required
+def add_comment(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+        comment_text = request.POST.get('comment_text')
+        if comment_text:
+            Comment.objects.create(post=post, creator=request.user, content=comment_text)
+    return redirect('forum_app:show_post', post_id=post.id)
