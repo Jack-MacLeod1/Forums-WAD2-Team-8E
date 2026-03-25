@@ -19,7 +19,8 @@
     background-color: #eeeeee;
     display: flex;
     flex-direction: column;
-    border: 3px solid black;
+    border: 2px solid black;
+    margin-top: -2px;
     z-index: 999;
 }
 
@@ -35,7 +36,7 @@
 }
 
 .sidebar-scrollbox {
-    height: calc(100vh - 148px);
+    height: calc(100vh - 16.2vh);
     overflow: auto;
 }
 
@@ -61,6 +62,8 @@
     margin: 20px;
 }
 
-.example{
-    font-size: 40px;
+.index-header-msg{
+    font-family: "Playpen Sans", cursive;
+    text-align: center;
+    font-size: 50px;
 }
