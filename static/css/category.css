@@ -22,7 +22,8 @@
     border: 2px solid black;
     border-radius: 2px;
     min-width: 900px;
-    width: 1300px;
+    max-width: 1300px;
+    width: auto;
 }
 
 .post-top-info {
