@@ -17,13 +17,11 @@
             <form class="post-form" id="post-form" method="post" action="{% url 'forum_app:add_post' category.slug %}" enctype="multipart/form-data">
                 {% csrf_token %}
 
-                <!-- 1. 标题行 -->
                 <div class="add-post-row title-row">
                     <label class="add-post-label">Title:</label>
                     <input type="text" name="title" id="id_title" placeholder="Enter Title" required class="add-input-field">
                 </div>
 
-                <!-- 2. 超大拖拽上传区 -->
                 <div class="add-post-drag-area" id="add-post-drag-area-container">
                     <input type="file" name="image" id="id_image" accept="image/*" class="add-post-file-input">
 
@@ -32,7 +30,6 @@
                     </div>
                 </div>
 
-                <!-- 3. 内容输入区 -->
                 <div class="add-post-row content-row">
                     <textarea name="content" id="id_content" placeholder="Enter Post Text here" required class="add-textarea-field"></textarea>
                 </div>
@@ -44,6 +41,5 @@
         </div>
     </div>
 
-    <!-- 挂载队友写的拖拽 JS -->
     <script src="{% static 'js/drag_drop_file.js' %}"></script>
 {% endblock %}
