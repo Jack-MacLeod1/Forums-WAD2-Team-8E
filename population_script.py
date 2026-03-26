@@ -11,6 +11,7 @@ import requests
 from django.core.files.base import ContentFile
 from datetime import timedelta
 from django.utils import timezone
+from requests.exceptions import ProxyError
 
 def populate():
     create_sample_user_and_profile()
@@ -67,16 +68,21 @@ def populate():
     for cat in cat_dict:
         for post in post_dict:
             if post_dict[post]["img_url"] != "":
-                image_obtainer = requests.get(post_dict[post]["img_url"])
-                if image_obtainer.status_code == 200:
+                try:
+                    image_obtainer = requests.get(post_dict[post]["img_url"])
+                    if image_obtainer.status_code == 200:
+                        p = create_post(post, post_dict[post]["description"], post_dict[post]["views"], 
+                                    post_dict[post]["likes"], Category.objects.get(name=cat))
+                        file_name = post_dict[post]['img_url'].split("/")[-1]
+                        p.image.save(file_name, ContentFile(image_obtainer.content), save = True)
+                    else:
+                        print("Error obtaining " + str(post["img_url"]))
+                        p = create_post(post, post_dict[post]["description"], post_dict[post]["views"], 
+                                post_dict[post]["likes"], Category.objects.get(name=cat))
+                except ProxyError:
+                    print("Image searching disallowed")
                     p = create_post(post, post_dict[post]["description"], post_dict[post]["views"], 
                                 post_dict[post]["likes"], Category.objects.get(name=cat))
-                    file_name = post_dict[post]['img_url'].split("/")[-1]
-                    p.image.save(file_name, ContentFile(image_obtainer.content), save = True)
-                else:
-                    print("Error obtaining " + str(post["img_url"]))
-                    p = create_post(post, post_dict[post]["description"], post_dict[post]["views"], 
-                            post_dict[post]["likes"], Category.objects.get(name=cat))
                 if "created_at" in post_dict[post]:
                     p.created_at = post_dict[post]["created_at"]
                     p.save()
