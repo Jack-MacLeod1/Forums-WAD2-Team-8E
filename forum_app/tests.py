@@ -91,3 +91,65 @@ class CategoryViewTests(TestCase):
         # Should not have the "no categories" message 
         self.assertNotContains(response, "No categories yet!")
 
+
+class LoginViewTests(TestCase):
+    
+    def testLoginViewHasContentNoCategories(self):
+        response = self.client.get(reverse("forum_app:login"))
+        # Check for form contents
+        self.assertContains(response, "Welcome Back")
+        self.assertContains(response, "Username:")
+        self.assertContains(response, "Password:")
+        self.assertContains(response, "Remember Me?")
+        self.assertContains(response, "No Account?")
+        # Check for buttons
+        self.assertContains(response, "Log In")
+        self.assertContains(response, "Sign Up")
+        # Ensure categories sidebar displays as expected
+        self.assertContains(response, "No categories yet!")
+
+    def testLoginViewHasCategories(self):
+        response = self.client.get(reverse("forum_app:login"))
+        Category.objects.create(name="Sport", description="sporting news")
+        # Check for form contents
+        self.assertContains(response, "Welcome Back")
+        self.assertContains(response, "Username:")
+        self.assertContains(response, "Password:")
+        self.assertContains(response, "Remember Me?")
+        self.assertContains(response, "No Account?")
+        # Check for buttons
+        self.assertContains(response, "Log In")
+        self.assertContains(response, "Sign Up")
+        # Check categories sidebar displays as expected
+        self.assertContains("Sport")
+        self.assertNotContains(response, "No categories yet!")
+
+
+class RegisterViewTests(TestCase):
+
+    def testReisterViewHasContentNoCategories(self):
+        response = self.client.get(reverse("forum_app:register"))
+        # Check for form contents
+        self.assertContains(response, "Sign Up")
+        self.assertContains(response, "Username:")
+        self.assertContains(response, "Email Address:")
+        self.assertContains(response, "Password:")
+        self.assertContains(response, "Bio:")
+        self.assertContains(response, "Picture:")
+        # Check categories sidebar displays as expected
+        self.assertContains(response, "No categories yet!")
+
+    def testReisterViewHasContentWithCategories(self):
+        response = self.client.get(reverse("forum_app:register"))
+        Category.objects.create(name="Sport", description="sporting news")
+        # Check for form contents
+        self.assertContains(response, "Sign Up")
+        self.assertContains(response, "Username:")
+        self.assertContains(response, "Email Address:")
+        self.assertContains(response, "Password:")
+        self.assertContains(response, "Bio:")
+        self.assertContains(response, "Picture:")
+        # Check categories sidebar displays as expected
+        self.assertContains(response, "Sport")
+        self.assertNotContains(response, "No categories yet!")
+
