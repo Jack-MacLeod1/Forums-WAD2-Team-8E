@@ -5,6 +5,6 @@ idna==3.11
 pillow==10.4.0
 packaging==25.0
 pytz==2025.2
-requests==2.32.5
+requests==2.32.4
 sqlparse==0.5.5
 urllib3==2.6.3
