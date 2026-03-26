@@ -120,6 +120,8 @@ post-list {
 .post-content{
     font-size: 18px;
     font-family: "Playpen Sans", cursive;
+    margin-left: 10px;
+    margin-right: 10px;
 
 }
 
