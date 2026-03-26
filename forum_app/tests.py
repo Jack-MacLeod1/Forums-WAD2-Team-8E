@@ -247,11 +247,10 @@ class PostViewTests(TestCase):
 
 class ProfileViewTests(TestCase):
 
+
     def test_view_other_user_no_post_no_categories(self):
         User.objects.create_user(username="user1", password="password1")
-        username = User.objects.all()[0].username
-        date_joined = User.objects.all()[0].date_joined
-        response = self.client.get(reverse("forum_app:profile", kwargs={"username": username}))
+        response = self.client.get(reverse("forum_app:profile", kwargs={"username": "user1"}))
         expected_date_joined = datetime.datetime.now().strftime("%d/%m/%Y")
 
         # Check for username and join date
@@ -266,5 +265,110 @@ class ProfileViewTests(TestCase):
         self.assertContains(response, "No categories yet!")
 
 
+    def test_view_other_user_with_post(self):
+        User.objects.create_user(username="user1", password="password1")
+        Category.objects.create(name="Sport", description="sporting news")
+        Post.objects.create(category=Category.objects.get(name="Sport"),
+                            creator=User.objects.get(username="user1"),
+                            title="My Post",
+                            content="My post is so epic and is about sports!")
+        response = self.client.get(reverse("forum_app:profile", kwargs={"username": "user1"}))
+        expected_date_joined = datetime.datetime.now().strftime("%d/%m/%Y")
+
+        # Check for username and join date
+        self.assertContains(response, "user1")
+        self.assertContains(response, "User since " + expected_date_joined)
+        # Posts now made 
+        self.assertNotContains(response, "No posts yet.")
+        self.assertContains(response, "Posts by user1")
+        # Post content
+        self.assertContains(response, "Topic: Sport")
+        self.assertContains(response, "Posted by user1")
+        self.assertContains(response, "Views: 0")
+        self.assertContains(response, "My Post")
+        self.assertContains(response, "Likes: 0")
+        # No edit profile button should be present
+        self.assertNotContains(response, "Edit Profile")
+        # Category sidebar should be present with category
+        self.assertContains(response, "Sport")
+        self.assertNotContains(response, "No categories yet!")
+
+    def test_own_user_page_no_post_or_categories(self):
+        User.objects.create_user(username="user1", password="password1")
+        expected_date_joined = datetime.datetime.now().strftime("%d/%m/%Y")
+        
+        login_successful = self.client.login(username="user1", password="password1")
+        self.assertTrue(login_successful)
+
+        response = self.client.get(reverse("forum_app:profile", kwargs={"username": "user1"}))
+        # Check for username and join date
+        self.assertContains(response, "user1")
+        self.assertContains(response, "User since " + expected_date_joined)
+        # Posts now made 
+        self.assertContains(response, "No posts yet.")
+        self.assertNotContains(response, "Posts by user1")
+        # Edit profile button should be visible
+        self.assertContains(response, "Edit Profile")
+        # No category message should be present
+        self.assertContains(response, "No categories yet!")
+
+
+    def test_own_user_page_with_post_and_categories(self):
+        User.objects.create_user(username="user1", password="password1")
+        Category.objects.create(name="Sport", description="sporting news")
+        Post.objects.create(category=Category.objects.get(name="Sport"),
+                            creator=User.objects.get(username="user1"),
+                            title="My Post",
+                            content="My post is so epic and is about sports!")
+        expected_date_joined = datetime.datetime.now().strftime("%d/%m/%Y")
+        
+        login_successful = self.client.login(username="user1", password="password1")
+        self.assertTrue(login_successful)
+
+        response = self.client.get(reverse("forum_app:profile", kwargs={"username": "user1"}))
+        # Check for username and join date
+        self.assertContains(response, "user1")
+        self.assertContains(response, "User since " + expected_date_joined)
+        # Posts now made 
+        self.assertNotContains(response, "No posts yet.")
+        self.assertContains(response, "Posts by user1")
+        # Edit profile button should be visible
+        self.assertContains(response, "Edit Profile")
+        # No category message should not be present
+        self.assertNotContains(response, "No categories yet!")
+
+
+
 class ProfileEditTests(TestCase):
-    pass
+    
+    def test_edit_profile_no_email_address(self):
+        User.objects.create_user(username="user1", password="password1")
+
+        login_successful = self.client.login(username="user1", password="password1")
+        self.assertTrue(login_successful)
+
+        response = self.client.get(reverse("forum_app:edit_profile", kwargs={"username": "user1"}))
+
+        # Check for expected fields and buttons
+        self.assertContains(response, "Edit Profile")
+        self.assertContains(response, "Email")
+        self.assertContains(response, "New Password")
+        self.assertContains(response, "Save Changes")
+        self.assertContains(response, "Cancel")
+    
+    def test_edit_profile_with_email_address(self):
+        User.objects.create_user(username="user1", password="password1", email="example@mail.com")
+
+        login_successful = self.client.login(username="user1", password="password1")
+        self.assertTrue(login_successful)
+
+        response = self.client.get(reverse("forum_app:edit_profile", kwargs={"username": "user1"}))
+
+        # Check for expected fields and buttons
+        self.assertContains(response, "Edit Profile")
+        self.assertContains(response, "Email")
+        self.assertContains(response, "New Password")
+        self.assertContains(response, "Save Changes")
+        self.assertContains(response, "Cancel")
+        # Should now display user's old email in the email box
+        self.assertContains(response, "example@mail.com")
