@@ -202,3 +202,24 @@ def add_comment(request, post_id):
         if comment_text:
             Comment.objects.create(post=post, creator=request.user, content=comment_text)
     return redirect('forum_app:show_post', post_id=post.id)
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        if email:
+            request.user.email = email
+            request.user.save()
+
+        if password:
+            request.user.set_password(password)
+            request.user.save()
+            login(request, request.user)
+    
+        return redirect('forum_app:profile', username=request.user.username)
+
+    return render(request, 'forum_app/edit_profile.html', {
+        'categories': Category.objects.all()
+    })

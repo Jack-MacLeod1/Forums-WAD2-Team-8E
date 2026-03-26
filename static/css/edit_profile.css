@@ -1,0 +1,70 @@
+main {
+    margin-left: 320px;
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Playpen Sans", cursive;
+    font-size: 9px;
+    color: black;
+    border: 2px solid black;
+    width: 40x;
+    height: 30px;
+    background-color: #f9cb9c;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.cancel-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Playpen Sans", cursive;
+    font-size: 9px;
+    color: black;
+    border: 2px solid black;
+    width: 40px;
+    height: 30px;
+    background-color: #f9cb9c;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-weight: bold;
+    font-family: "Playpen Sans", cursive;
+}
+
+.form-group input {
+    padding: 8px;
+    border: 2px solid black;
+    border-radius: 4px;
+    font-family: "Playpen Sans", cursive;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
