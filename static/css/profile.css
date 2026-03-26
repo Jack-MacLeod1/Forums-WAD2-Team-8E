@@ -1,16 +1,20 @@
 @import url('https://fonts.googleapis.com');
 
+body{
+    font-family: "Playpen Sans", cursive;
+
+}
+
 main {
     margin-left: 260px;
     margin-top: 70px;
     display: flex;
     justify-content: center;
     padding: 20px;
-    width: calc(100% - 260px);
 }
 
 .profile-container {
-    width: 70%;
+    width: 100%;
     max-width: 800px;
     display: flex;
     flex-direction: column;
@@ -66,7 +70,7 @@ button {
 }
 
 .profile-posts-title {
-    font-family: cursive;
+    font-family: "Playpen Sans", cursive;
     margin-bottom: 15px;
 }
 

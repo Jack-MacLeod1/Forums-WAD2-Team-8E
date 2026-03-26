@@ -249,3 +249,7 @@ post-list {
 .liked-active {
     background-color: #ffdde0 !important;
 }
+
+.post-interactions, .comments-display-section{
+    margin: 10px
+}
