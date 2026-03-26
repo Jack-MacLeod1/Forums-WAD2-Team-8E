@@ -118,6 +118,7 @@ def show_post(request, post_id):
     category_list = Category.objects.order_by()
     post = get_object_or_404(Post, id=post_id)
 
+    # Following ensures users don't artificially inflate view counts
     if 'viewed_posts' not in request.session:
         request.session['viewed_posts'] = []
 
@@ -176,6 +177,7 @@ def add_post(request, category_name_slug):
 
         if form.is_valid():
             if category:
+                # Set default values
                 post = form.save(commit=False)
                 post.category = category
                 post.creator = request.user
