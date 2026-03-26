@@ -23,6 +23,15 @@ def populate():
                 "likes": 10},
                 "Sport": {"description": "Latest stories in Sport",
                 "views": 54,
+                "likes": 12},
+                "Tech": {"description": "Keeping up with tech",
+                "views": 54,
+                "likes": 12},
+                "Cars": {"description": "For the petrol (or diesel!) heads",
+                "views": 54,
+                "likes": 12},
+                "Animals": {"description": "Awesome animals",
+                "views": 54,
                 "likes": 12}}
     
     post_dict = {"post1": {"description": "This is some sample text describing the post content",
@@ -52,48 +61,63 @@ def populate():
                           "views": 65,
                           "likes": 41,
                           "img_url": "https://pbs.twimg.com/media/FZW22-ZUYAAC22n.png",
-                          "created_at": timezone.now() - timedelta(days=10)}}
+                          "created_at": timezone.now() - timedelta(days=10)},
+                "Distubance in Aberdeenshire Water": {"description": "A previously overlooked coastal village in northern Scotland has unexpectedly become the focus of \
+                    international attention after residents reported a series of unusual low-frequency sounds emanating from beneath the seabed.\
+                    The phenomenon, first noticed by local fishermen earlier this month, has since been recorded by independent researchers, who describe it as a 'rhythmic, almost mechanical hum'\
+                    occurring at irregular intervals. While initial theories pointed to underwater geological activity, recent analyses suggest the pattern does not match known seismic or volcanic signatures.",
+                        "views": 110,
+                        "likes": 41,
+                        "img_url": ""}}
     
-    comment_dict = {"c1": {"content": "This is some sample text describing c1 content",
+    comment_dict = {"c1": {"content": "Wow this is so cool!!!",
                            "likes": 12},
-                    "c2": {"content": "This is some sample text describing c2 comment content",
+                    "c2": {"content": "Thank you for sharing. Very helpful information!",
                            "likes": 13},
-                    "c3": {"content": "This is some sample text describing c3 comment content",
+                    "c3": {"content": "This is super inspiring!",
                            "likes": 18},
     }
 
     for cat in cat_dict:
         create_category(cat, cat_dict[cat]["description"], cat_dict[cat]["views"], cat_dict[cat]["likes"])
     
-    for cat in cat_dict:
-        for post in post_dict:
-            if post_dict[post]["img_url"] != "":
-                try:
-                    image_obtainer = requests.get(post_dict[post]["img_url"])
-                    if image_obtainer.status_code == 200:
-                        p = create_post(post, post_dict[post]["description"], post_dict[post]["views"], 
-                                    post_dict[post]["likes"], Category.objects.get(name=cat))
-                        file_name = post_dict[post]['img_url'].split("/")[-1]
-                        p.image.save(file_name, ContentFile(image_obtainer.content), save = True)
-                    else:
-                        print("Error obtaining " + str(post["img_url"]))
-                        p = create_post(post, post_dict[post]["description"], post_dict[post]["views"], 
-                                post_dict[post]["likes"], Category.objects.get(name=cat))
-                except ProxyError:
-                    print("Image searching disallowed - creating data without image.")
+    for post in post_dict:
+        cat = "Animals"
+        if post_dict[post]["img_url"] != "":
+            try:
+                image_obtainer = requests.get(post_dict[post]["img_url"])
+                if image_obtainer.status_code == 200:
                     p = create_post(post, post_dict[post]["description"], post_dict[post]["views"], 
                                 post_dict[post]["likes"], Category.objects.get(name=cat))
-                if "created_at" in post_dict[post]:
-                    p.created_at = post_dict[post]["created_at"]
-                    p.save()
-            else:
-                create_post(post, post_dict[post]["description"], post_dict[post]["views"], 
+                    file_name = post_dict[post]['img_url'].split("/")[-1]
+                    p.image.save(file_name, ContentFile(image_obtainer.content), save = True)
+                else:
+                    print("Error obtaining " + str(post["img_url"]))
+                    p = create_post(post, post_dict[post]["description"], post_dict[post]["views"], 
                             post_dict[post]["likes"], Category.objects.get(name=cat))
+            except ProxyError:
+                print("Image searching disallowed - creating data without image.")
+                p = create_post(post, post_dict[post]["description"], post_dict[post]["views"], 
+                            post_dict[post]["likes"], Category.objects.get(name=cat))
+            if "created_at" in post_dict[post]:
+                p.created_at = post_dict[post]["created_at"]
+                p.save()
+        else:
+            cat = "UK News"
+            create_post(post, post_dict[post]["description"], post_dict[post]["views"], 
+                        post_dict[post]["likes"], Category.objects.get(name=cat))
     
-    for comment in comment_dict:
-        for post in Post.objects.all():
-            create_comment(post, content = comment_dict[comment]["content"],
-                            likes = comment_dict[comment]["likes"])
+
+    post1 = Post.objects.all()[0]
+    post2 = Post.objects.all()[1]
+    post3 = Post.objects.all()[2]
+    
+    create_comment(post1, content = comment_dict["c1"]["content"],
+                    likes = comment_dict["c1"]["likes"])
+    create_comment(post2, content = comment_dict["c2"]["content"],
+                    likes = comment_dict["c2"]["likes"])
+    create_comment(post3, content = comment_dict["c3"]["content"],
+                    likes = comment_dict["c3"]["likes"])
 
 def create_sample_user_and_profile():
     User = get_user_model()
