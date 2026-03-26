@@ -245,3 +245,7 @@ post-list {
     color: #888;
     font-style: italic;
 }
+
+.liked-active {
+    background-color: #ffdde0 !important;
+}

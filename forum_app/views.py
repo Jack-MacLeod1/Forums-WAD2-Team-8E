@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from forum_app.forms import UserForm, UserProfileForm, PostForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.http import HttpResponse
-from forum_app.models import Category, Post, Comment
+from forum_app.models import Category, Post, Comment, UserProfile
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from datetime import timedelta
+
 
 
 def index(request):
@@ -203,23 +204,29 @@ def add_comment(request, post_id):
             Comment.objects.create(post=post, creator=request.user, content=comment_text)
     return redirect('forum_app:show_post', post_id=post.id)
 
+
 @login_required
-def edit_profile(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-
-        if email:
-            request.user.email = email
-            request.user.save()
-
-        if password:
-            request.user.set_password(password)
-            request.user.save()
-            login(request, request.user)
-    
+def edit_profile(request, username):
+    if request.user.username != username:
         return redirect('forum_app:profile', username=request.user.username)
 
-    return render(request, 'forum_app/edit_profile.html', {
-        'categories': Category.objects.all()
-    })
+    category_list = Category.objects.order_by()
+
+    if request.method == 'POST':
+        new_email = request.POST.get('email')
+        new_password = request.POST.get('password')
+        user = request.user
+
+        if new_email:
+            user.email = new_email
+        if new_password:
+            user.set_password(new_password)
+        user.save()
+
+        if new_password:
+            update_session_auth_hash(request, user)
+
+        return redirect('forum_app:profile', username=user.username)
+
+    context_dict = {'categories': category_list}
+    return render(request, 'forum_app/edit_profile.html', context_dict)

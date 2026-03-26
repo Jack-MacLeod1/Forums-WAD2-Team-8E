@@ -115,3 +115,37 @@ button {
     font-style: italic;
     color: #888;
 }
+
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+
+.edit-profile-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    background-color: #f9cb9c;
+    border: 2px solid black;
+    border-radius: 5px;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Playpen Sans', cursive;
+
+
+    height: 35px;
+    width: max-content;
+    align-self: center;
+}
+
+.edit-profile-btn:hover {
+    background-color: #faf2e2;
+}

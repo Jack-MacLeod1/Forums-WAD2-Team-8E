@@ -16,7 +16,9 @@
         </div>
 
         {% if request.user == profile_user %}
-            <button>Edit Profile</button>
+            <a href="{% url 'forum_app:edit_profile' profile_user.username %}" class="edit-profile-btn">
+                Edit Profile
+            </a>
         {% endif %}
     </div>
 

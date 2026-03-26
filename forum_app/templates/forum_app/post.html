@@ -14,7 +14,7 @@
         <a class="post-topic" href="{% url 'forum_app:show_category' post.category.slug %}">Topic: {{ post.category.name }}</a>
         <a class="poster" href="{% url 'forum_app:profile' post.creator.username %}">Posted by {{ post.creator.username }} </a>
         <p class="post-views">Views: {{ post.views }} </p>
-        <p class="post-date">{{ post.created_at }}</p>
+        <p class="post-date">{{ post.created_at|date:"Y-m-d H:i" }}</p>
     </div>
 
     <div class="post-second-row">
@@ -35,7 +35,7 @@
         <div class="post-interactions">
             <form action="{% url 'forum_app:like_post' post.id %}" method="post" class="like-form">
                 {% csrf_token %}
-                <button type="submit" class="like-btn" {% if has_liked %}style="background-color: #ffdde0;"{% endif %}>
+                <button type="submit" class="like-btn {% if has_liked %}liked-active{% endif %}">
 
                     {% if has_liked %}
                         <i class="fa-solid fa-heart" style="color: red;"></i> Liked

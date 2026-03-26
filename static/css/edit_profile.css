@@ -1,9 +1,16 @@
-main {
-    margin-left: 320px;
-    margin-top: 70px;
-    display: flex;
-    justify-content: center;
+.edit-container {
     padding: 20px;
+}
+
+.edit-header {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.edit-header h2 {
+    font-family: "Playpen Sans", cursive;
+    margin: 0;
 }
 
 .submit-btn {
@@ -11,32 +18,36 @@ main {
     align-items: center;
     justify-content: center;
     font-family: "Playpen Sans", cursive;
-    font-size: 9px;
+    font-size: 14px;
     color: black;
     border: 2px solid black;
-    width: 40x;
-    height: 30px;
+    width: auto;
+    padding: 0 15px;
+    height: 35px;
     background-color: #f9cb9c;
     cursor: pointer;
     border-radius: 5px;
     text-decoration: none;
 }
+.submit-btn:hover { background-color: #faf2e2; }
 
 .cancel-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: "Playpen Sans", cursive;
-    font-size: 9px;
+    font-size: 14px;
     color: black;
     border: 2px solid black;
-    width: 40px;
-    height: 30px;
-    background-color: #f9cb9c;
+    width: auto;
+    padding: 0 15px;
+    height: 35px;
+    background-color: #e0e0e0;
     cursor: pointer;
     border-radius: 5px;
     text-decoration: none;
 }
+.cancel-btn:hover { background-color: #d5d5d5; }
 
 .edit-form {
     display: flex;
@@ -67,4 +78,3 @@ main {
     gap: 10px;
     margin-top: 10px;
 }
-
