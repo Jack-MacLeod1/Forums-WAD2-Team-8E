@@ -24,8 +24,9 @@
     </div>
 
     <div class="middle-box">
-        <h3 class="profile-posts-title">Posts by {{ profile_user.username }}</h3>
-
+        {% if posts %}
+            <h3 class="profile-posts-title">Posts by {{ profile_user.username }}</h3>
+        {% endif %}
         {% for post in posts %}
             <div class="post-item">
                         <div class="post-top-info">

@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from .models import Category, Post, Comment, UserProfile, User
+import datetime
 
 # Create your tests here.
 
@@ -26,7 +27,7 @@ class IndexViewTests(TestCase):
 
     def test_index_view_with_category_and_post(self):
         # No posts should mean "There are no posts!" is displayed
-        User.objects.create(username="user1", password="password1")
+        User.objects.create_user(username="user1", password="password1")
         Category.objects.create(name="Sport", description="sporting news")
         Post.objects.create(category=Category.objects.get(name="Sport"),
                             creator=User.objects.get(username="user1"),
@@ -52,6 +53,7 @@ class IndexViewTests(TestCase):
         self.assertNotContains(response, "No categories yet!")
 
 
+
 class CategoryViewTests(TestCase):
 
     def test_category_view_no_posts(self):
@@ -68,7 +70,7 @@ class CategoryViewTests(TestCase):
 
     def test_category_with_post(self):
 
-        User.objects.create(username="user1", password="password1")
+        User.objects.create_user(username="user1", password="password1")
         Category.objects.create(name="Sport", description="sporting news")
         Post.objects.create(category=Category.objects.get(name="Sport"),
                             creator=User.objects.get(username="user1"),
@@ -159,6 +161,7 @@ class LoginViewTests(TestCase):
         self.assertNotContains(response, "No categories yet!")
 
 
+
 class RegisterViewTests(TestCase):
 
     def test_register_view_has_content_no_categories(self):
@@ -187,10 +190,12 @@ class RegisterViewTests(TestCase):
         self.assertContains(response, "Sport")
         self.assertNotContains(response, "No categories yet!")
 
+
+
 class PostViewTests(TestCase):
 
     def test_post_view_no_comments(self):
-        User.objects.create(username="user1", password="password1")
+        User.objects.create_user(username="user1", password="password1")
         Category.objects.create(name="Sport", description="sporting news")
         Post.objects.create(category=Category.objects.get(name="Sport"),
                             creator=User.objects.get(username="user1"),
@@ -212,7 +217,7 @@ class PostViewTests(TestCase):
 
 
     def test_post_view_with_comment_and_liked(self):
-        User.objects.create(username="user1", password="password1")
+        User.objects.create_user(username="user1", password="password1")
         Category.objects.create(name="Sport", description="sporting news")
         Post.objects.create(category=Category.objects.get(name="Sport"),
                             creator=User.objects.get(username="user1"),
@@ -237,3 +242,29 @@ class PostViewTests(TestCase):
         self.assertContains(response, "Comments (1)")
         self.assertContains(response, "This is my awesome comment")
         self.assertNotContains(response, "No comments yet. Be the first to share your thoughts!")
+
+#Test profile view, edit profile
+
+class ProfileViewTests(TestCase):
+
+    def test_view_other_user_no_post_no_categories(self):
+        User.objects.create_user(username="user1", password="password1")
+        username = User.objects.all()[0].username
+        date_joined = User.objects.all()[0].date_joined
+        response = self.client.get(reverse("forum_app:profile", kwargs={"username": username}))
+        expected_date_joined = datetime.datetime.now().strftime("%d/%m/%Y")
+
+        # Check for username and join date
+        self.assertContains(response, "user1")
+        self.assertContains(response, "User since " + expected_date_joined)
+        # No posts made 
+        self.assertContains(response, "No posts yet.")
+        self.assertNotContains(response, "Posts by user1")
+        # No edit profile button should be present
+        self.assertNotContains(response, "Edit Profile")
+        # No category message should be present
+        self.assertContains(response, "No categories yet!")
+
+
+class ProfileEditTests(TestCase):
+    pass
