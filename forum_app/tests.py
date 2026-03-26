@@ -6,7 +6,7 @@ from .models import Category, Post, Comment, UserProfile, User
 
 class IndexViewTests(TestCase):
 
-    def testIndexViewNoPostsOrCategories(self):
+    def test_index_view_no_posts_or_categories(self):
         # No posts should mean "There are no posts!" is displayed
         # No categories should mean "No categories yet!" is displayed
         response = self.client.get(reverse("forum_app:index")) 
@@ -14,7 +14,7 @@ class IndexViewTests(TestCase):
         self.assertContains(response, "There are no posts!")
         self.assertContains(response, "No categories yet!")
 
-    def testIndexViewWithCategoriesNoPosts(self):
+    def test_index_view_with_category_no_posts(self):
         # No posts should mean "There are no posts!" is displayed
         Category.objects.create(name="Sport", description="sporting news")
         response = self.client.get(reverse("forum_app:index")) 
@@ -24,7 +24,7 @@ class IndexViewTests(TestCase):
         # Should not have the "no categories" message 
         self.assertNotContains(response, "No categories yet!")
 
-    def testIndexViewWithCategoriesAndPost(self):
+    def test_index_view_with_category_and_post(self):
         # No posts should mean "There are no posts!" is displayed
         User.objects.create(username="user1", password="password1")
         Category.objects.create(name="Sport", description="sporting news")
@@ -54,7 +54,7 @@ class IndexViewTests(TestCase):
 
 class CategoryViewTests(TestCase):
 
-    def testCategoryViewNoPosts(self):
+    def test_category_view_no_posts(self):
         # No posts should mean "There are no posts!" is displayed
         Category.objects.create(name="Sport", description="sporting news")
 
@@ -65,7 +65,7 @@ class CategoryViewTests(TestCase):
         self.assertContains(response, "Sport Forums")
     
 
-    def testCategoryWithPost(self):
+    def test_category_with_post(self):
 
         User.objects.create(username="user1", password="password1")
         Category.objects.create(name="Sport", description="sporting news")
@@ -94,7 +94,7 @@ class CategoryViewTests(TestCase):
 
 class LoginViewTests(TestCase):
     
-    def testLoginViewHasContentNoCategories(self):
+    def test_login_view_has_content_no_categories(self):
         response = self.client.get(reverse("forum_app:login"))
         # Check for form contents
         self.assertContains(response, "Welcome Back")
@@ -108,7 +108,7 @@ class LoginViewTests(TestCase):
         # Ensure categories sidebar displays as expected
         self.assertContains(response, "No categories yet!")
 
-    def testLoginViewHasCategories(self):
+    def test_login_view_has_categories(self):
         response = self.client.get(reverse("forum_app:login"))
         Category.objects.create(name="Sport", description="sporting news")
         # Check for form contents
@@ -127,7 +127,7 @@ class LoginViewTests(TestCase):
 
 class RegisterViewTests(TestCase):
 
-    def testReisterViewHasContentNoCategories(self):
+    def test_reister_view_has_content_no_categories(self):
         response = self.client.get(reverse("forum_app:register"))
         # Check for form contents
         self.assertContains(response, "Sign Up")
@@ -139,7 +139,7 @@ class RegisterViewTests(TestCase):
         # Check categories sidebar displays as expected
         self.assertContains(response, "No categories yet!")
 
-    def testReisterViewHasContentWithCategories(self):
+    def test_reister_view_has_content_with_categories(self):
         response = self.client.get(reverse("forum_app:register"))
         Category.objects.create(name="Sport", description="sporting news")
         # Check for form contents
