@@ -80,7 +80,7 @@ def populate():
                         p = create_post(post, post_dict[post]["description"], post_dict[post]["views"], 
                                 post_dict[post]["likes"], Category.objects.get(name=cat))
                 except ProxyError:
-                    print("Image searching disallowed")
+                    print("Image searching disallowed - creating data without image.")
                     p = create_post(post, post_dict[post]["description"], post_dict[post]["views"], 
                                 post_dict[post]["likes"], Category.objects.get(name=cat))
                 if "created_at" in post_dict[post]:
