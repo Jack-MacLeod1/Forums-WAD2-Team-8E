@@ -55,11 +55,13 @@
     width: calc(100% - 260px);
     margin-top: 40px;
     display: flex;
-
+    justify-content: center;
 }
 
 .central-content{
     margin: 20px;
+    width: 100%;
+    max-width: 1000px;
 }
 
 .index-header-msg{

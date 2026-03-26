@@ -3,22 +3,47 @@
 
 {% block headblock %}
     <title>Create Post - Forums</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/category.css' %}">
     <link rel="stylesheet" href="{% static 'css/add_post.css' %}">
 {% endblock %}
 
 {% block central-content %}
-    <div class="all">
-        <h1 class="category-header">Add a Post to {{ category.name }}</h1>
+    <div class="add-post-wrapper">
+        <h1 class="category-header add-post-main-title">Make a Post</h1>
+
         <div class="post-form-div">
             <form class="post-form" id="post-form" method="post" action="{% url 'forum_app:add_post' category.slug %}" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" name="submit" value="Create Post" class="submit-btn" />
+
+                <!-- 1. 标题行 -->
+                <div class="add-post-row title-row">
+                    <label class="add-post-label">Title:</label>
+                    <input type="text" name="title" id="id_title" placeholder="Enter Title" required class="add-input-field">
+                </div>
+
+                <!-- 2. 超大拖拽上传区 -->
+                <div class="add-post-drag-area" id="add-post-drag-area-container">
+                    <input type="file" name="image" id="id_image" accept="image/*" class="add-post-file-input">
+
+                    <div class="image-preview-container" id="add-post-image-preview">
+                        <p class="drag-drop-text">Drag and Drop Media Here!</p>
+                    </div>
+                </div>
+
+                <!-- 3. 内容输入区 -->
+                <div class="add-post-row content-row">
+                    <textarea name="content" id="id_content" placeholder="Enter Post Text here" required class="add-textarea-field"></textarea>
+                </div>
+
+                <div class="add-post-actions">
+                    <button type="submit" class="submit-btn">Create Post</button>
+                </div>
             </form>
         </div>
     </div>
+
+    <!-- 挂载队友写的拖拽 JS -->
     <script src="{% static 'js/drag_drop_file.js' %}"></script>
 {% endblock %}
