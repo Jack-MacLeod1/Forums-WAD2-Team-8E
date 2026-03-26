@@ -1,0 +1,25 @@
+{% extends "forum_app/base.html" %}
+{% block content %}
+
+
+<div class="profile-container">
+    <div class="profile-header">
+        <h2>Edit Profile</h2>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <label>Email</label>
+        <input type="email" name="email" value="{{ request.user.email }}">
+
+        <label> New Password </label>
+        <input type="password" name="password" placeholder="Leave blank to remain unchanged">
+
+        <button type="submit">Save Changed</button>
+        <a href="{% url 'forum_app:profile' request.user.username %}">
+            <button type="button">Cancel</button>
+        </a>
+    </form>
+</div>
+
+{% endblock %}
