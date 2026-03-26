@@ -64,3 +64,54 @@ button {
     cursor: pointer;
     font-family: "Playpen Sans", cursive;
 }
+
+.profile-posts-title {
+    font-family: cursive;
+    margin-bottom: 15px;
+}
+
+.profile-post-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: white;
+}
+
+.profile-post-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.profile-post-topic {
+    color: #f9cb9c;
+    font-weight: bold;
+}
+
+.profile-post-title-wrapper {
+    margin-top: 10px;
+}
+
+.profile-post-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+
+.profile-post-title:hover {
+    text-decoration: underline;
+}
+
+.profile-post-stats {
+    margin-top: 10px;
+    font-size: 0.8em;
+    color: #888;
+}
+
+.profile-no-posts {
+    font-style: italic;
+    color: #888;
+}
