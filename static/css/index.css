@@ -9,13 +9,13 @@
     border-radius: 10px;
 }
 
-.sidebar{
+.sidebar {
     position: fixed;
-    padding: auto;  
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     width: 260px;
     top: 70px;
-    left: 0px;
+    left: 0;
     background-color: #eeeeee;
     display: flex;
     flex-direction: column;
